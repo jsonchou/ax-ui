@@ -1,0 +1,30 @@
+﻿{
+    "presets": [
+        [
+            "es2015", {
+                "modules": false
+            }
+        ],
+        ["react"],
+        ["stage-0"]
+    ],
+    "plugins": [
+        ["transform-decorators-legacy"],
+        ["transform-do-expressions"],
+        ["transform-function-bind"],
+        ["syntax-dynamic-import"]
+    ],
+    "ignore": [
+        "*.min.js"
+    ]
+}
+
+
+// stage-0:
+// transform-do-expressions
+// transform-function-bind
+
+// stage-1:
+// transform-class-properties
+// transform-export-extensions
+

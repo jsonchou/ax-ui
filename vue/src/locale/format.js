@@ -1,3 +1,5 @@
+const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
+
 export default function () {
     return (str, ...args) => {
 

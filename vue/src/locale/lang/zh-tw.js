@@ -1,5 +1,8 @@
 export default {
     lang:'zh-tw',
+    picker:{
+        test:'測試'
+    },
     timePicker: {
         placeholder: '選擇時間',
     },

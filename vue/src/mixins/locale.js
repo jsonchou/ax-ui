@@ -1,11 +1,10 @@
-import {
-    t
-} from '../locale'
+import locale from '../locale'
 
 export default {
     methods: {
-        t(...args) {
-            return t.apply(this, args)
+        t: function (...args) {
+            let me = this;
+            return locale.t.apply(me, args)
         }
     }
 }

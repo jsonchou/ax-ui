@@ -1,8 +1,6 @@
 import Vue from 'vue';
 import Format from './format';
 
-const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
-
 const format = Format();
 
 // "timePicker.placeholder:'已选 {checked}/{total} 项'"
@@ -10,7 +8,8 @@ const format = Format();
 
 export default {
     t: function (objStr, opts) {
-        let lang = Vue.$ax.lang;
+        let lang = Vue.prototype.$ax.lang;
+
         let $t = Object.getPrototypeOf(this || Vue).$t;
 
         //if vueI18n plugin installed

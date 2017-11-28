@@ -13,7 +13,6 @@
         },
         mounted() {
             let me = this;
-            console.log('page index:', me)
         }
     }
 </script>

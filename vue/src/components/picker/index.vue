@@ -1,18 +1,16 @@
 <template>
-    <div class="template-picker">
+    <div class="template-picker" :class="cls">
         <slot>
-            picker component
+            {{picker}}
         </slot>
     </div>
 </template>
 
 <script>
     import baseMixin from '../../mixins/base'
-    import config from '../../utils/config'
-    const cls = `${config.prefix}-picker`;
 
     export default {
-        mixins: [...baseMixin],
+        mixins: Object.values(baseMixin),
         name: 'Picker',
         props: {
             offsetTop: {
@@ -25,13 +23,15 @@
         },
         data() {
             return {
+                picker: '',
+                cls: `${this.$ax.config.prefix}-picker`,
                 styles: {}
             };
         },
         mounted() {
             let me = this;
-            console.log('VUE', window.Vue.prototype)
             console.log('template-picker:', me)
+            this.picker = me.t('picker.test')
         }
     }
 </script>

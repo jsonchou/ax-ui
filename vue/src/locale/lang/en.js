@@ -1,5 +1,8 @@
 export default {
     lang:'en',
+    picker:{
+        test:'test'
+    },
     timePicker: {
         placeholder: 'select time',
     },

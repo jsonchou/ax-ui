@@ -1,4 +1,7 @@
 export default {
+    props: {
+        
+    },
     data() {
         return {
             visible: false

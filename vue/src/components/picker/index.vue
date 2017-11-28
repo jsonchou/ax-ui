@@ -13,13 +13,7 @@
         mixins: Object.values(baseMixin),
         name: 'Picker',
         props: {
-            offsetTop: {
-                type: Number,
-                default: 0
-            },
-            offsetBottom: {
-                type: Number
-            }
+            
         },
         data() {
             return {

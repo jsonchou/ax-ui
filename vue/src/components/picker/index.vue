@@ -7,11 +7,12 @@
 </template>
 
 <script>
-    const cls = 'ax-picker';
-    import std from '../../mixins/std'
-    import uuid from '../../mixins/uuid'
+    import baseMixin from '../../mixins/base'
+    import config from '../../utils/config'
+    const cls = `${config.prefix}-picker`;
+
     export default {
-        mixins: [std, uuid],
+        mixins: [...baseMixin],
         name: 'Picker',
         props: {
             offsetTop: {
@@ -29,6 +30,7 @@
         },
         mounted() {
             let me = this;
+            console.log('VUE', window.Vue.prototype)
             console.log('template-picker:', me)
         }
     }

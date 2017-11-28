@@ -10,13 +10,15 @@ const format = Format();
 
 export default {
     t: function (objStr, opts) {
-        let lang = opts.lang; //lang/zh-cn object
+        let lang = Vue.$ax.lang;
         let $t = Object.getPrototypeOf(this || Vue).$t;
 
-        //if installed vueI18n plugin
-        let i18nStr = $t(arguments);
-        if (i18nStr) {
-            return i18nStr;
+        //if vueI18n plugin installed
+        if ($t) {
+            let i18nStr = $t(objStr);
+            if (i18nStr) {
+                return i18nStr;
+            }
         }
 
         let arr = objStr.split('.')

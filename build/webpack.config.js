@@ -13,9 +13,9 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const env = process.env.NODE_ENV === 'production' ? 'p' : 'd';
 
-const version = process.env.VERSION || require('./package.json').version;
+const version = process.env.VERSION || require('../package.json').version;
 
-const spa = "vue";
+const spa = "vue"; //react
 
 console.log('---------------------------');
 console.log(process.env.NODE_ENV);
@@ -76,7 +76,10 @@ if (spa == 'react') {
 
 let plugins = [
     // new HappyPack({ id: 'happybabel', loaders: ['babel-loader'], threadPool: happyThreadPool, cache: true, verbose: true }),
-    // new webpack.optimize.CommonsChunkPlugin({ name: "vendor", filename: "vendor.js", }),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: "vendors",
+        filename: "vendors.js",
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
@@ -97,7 +100,7 @@ let plugins = [
     new webpack.BannerPlugin({
         banner: `/**
     * ${spa} app v${version}
-    * (@) ${new Date().getFullYear()} ZA TEAM
+    * (@) ${new Date().getFullYear()} JSONCHOU
     */`,
         raw: true,
         entryOnly: true
@@ -111,15 +114,15 @@ module.exports = {
     },
     //debug: process.env.NODE_ENV === 'development' ? true : false,//#source-map|#cheap-module-eval-source-map|eval
     devtool: env === 'p' ? false : 'eval',
-    // entry: ,
     entry: {
-        [spa]: `./${spa}/examples/main.js${spa==='react'?'x':''}`,
+        'ax': `../${spa}/examples/main.js${spa==='react'?'x':''}`,
+        vendors: [`${spa}`, `${spa}-router`]
     },
     output: {
-        path: path.join(__dirname, spa),
-        filename: '[name]/dist/ax-build.js',
+        path: path.join(__dirname, '../' + spa, 'dist'),
+        filename: '[name].js',
         chunkFilename: '[name].[id].chunk.js',
-        publicPath: '/'
+        publicPath: ``,
     },
     // We use PostCSS for autoprefixing only.
     resolve: {
@@ -128,6 +131,9 @@ module.exports = {
     },
     module: {
         rules: myLoaders
+    },
+    externals: {
+      
     },
     devServer: {
         "host": '0.0.0.0',

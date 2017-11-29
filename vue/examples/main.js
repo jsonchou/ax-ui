@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 
 import ax from '../src/index'
-import lang from '../src/locale/lang/zh-tw'
+import lang from '../src/locale/lang/zh-cn' //en,zh-cn,zh-tw
 
 import router from './router'
 

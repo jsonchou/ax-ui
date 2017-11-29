@@ -79,7 +79,7 @@ let plugins = [
     // new HappyPack({ id: 'happybabel', loaders: ['babel-loader'], threadPool: happyThreadPool, cache: true, verbose: true }),
     new webpack.optimize.CommonsChunkPlugin({
         name: "vendors",
-        filename: "vendors.js",
+        filename: `dist/[name].js`,
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.HotModuleReplacementPlugin(),
@@ -121,9 +121,9 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, `../${spa}/src`),
-        filename: `[name].js`,
-        chunkFilename: '[name].[id].chunk.js',
-        publicPath: `${spa}/dist`,
+        filename: `dist/[name].js`,
+        chunkFilename: 'dist/[name].[id].chunk.js',
+        publicPath: `${spa}`,
     },
     // We use PostCSS for autoprefixing only.
     resolve: {

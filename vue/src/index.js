@@ -21,7 +21,7 @@ const install = function (Vue, opts = {}) {
 
     //bind component
     Object.values(components).forEach(comp => {
-        Vue.component(config.prefix + comp.name, comp);
+        Vue.component(config.prefix + comp.name, comp); //standard mode
     })
 
     //inject base components

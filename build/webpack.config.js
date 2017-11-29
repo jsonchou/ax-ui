@@ -14,8 +14,9 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const env = process.env.NODE_ENV === 'production' ? 'p' : 'd';
 
 const version = process.env.VERSION || require('../package.json').version;
+const config = require('./config.js');
 
-const spa = "vue"; //react
+const spa = config.spa;
 
 console.log('---------------------------');
 console.log(process.env.NODE_ENV);
@@ -119,10 +120,10 @@ module.exports = {
         vendors: [`${spa}`, `${spa}-router`]
     },
     output: {
-        path: path.join(__dirname, '../' + spa, 'dist'),
-        filename: '[name].js',
+        path: path.join(__dirname, `../${spa}/src`),
+        filename: `[name].js`,
         chunkFilename: '[name].[id].chunk.js',
-        publicPath: ``,
+        publicPath: `${spa}/dist`,
     },
     // We use PostCSS for autoprefixing only.
     resolve: {
@@ -133,7 +134,7 @@ module.exports = {
         rules: myLoaders
     },
     externals: {
-      
+
     },
     devServer: {
         "host": '0.0.0.0',
@@ -141,7 +142,7 @@ module.exports = {
         "useLocalIp": true,
         "contentBase": "./",
         "historyApiFallback": false,
-        "port": 8081,
+        "port": config.port,
         "open": false,
         "quiet": false,
         "noInfo": false,

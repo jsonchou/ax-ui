@@ -1,8 +1,8 @@
 <template>
-    <div class="template-picker" :class="cls">
-        <slot>
+    <div :class="cls+'-wrapper'">
+        <div :class="cls">
             {{picker}}
-        </slot>
+        </div>
     </div>
 </template>
 
@@ -13,12 +13,12 @@
         mixins: Object.values(baseMixin),
         name: 'Picker',
         props: {
-            
+
         },
         data() {
             return {
-                picker: '',
                 cls: `${this.$ax.config.prefix}-picker`,
+                picker: '',
                 styles: {}
             };
         },

@@ -1,6 +1,6 @@
 <template>
     <div class="template-index">
-        <ax-picker></ax-picker>
+        <ax-picker ></ax-picker>
     </div>
 </template>
 

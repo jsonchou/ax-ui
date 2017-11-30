@@ -30,10 +30,7 @@ router.afterEach((to, from) => {
     document.title = to.name;
 });
 
-window.router = router;
-window.Vue = Vue;
-
-new Vue({
+window.gApp = new Vue({
     router,
     render: h => h(App),
 }).$mount('#app');

@@ -19,6 +19,14 @@ const install = function (Vue, opts = {}) {
     }
     this.installed = true;
 
+    //base information
+    const ax = {};
+    ax.config = config;
+    ax.lang = opts.lang;
+    ax.version = config.version;
+    Vue.prototype.$ax = ax;
+
+
     //bind component
     Object.values(components).forEach(comp => {
         Vue.component(config.prefix + comp.name, comp); //standard mode
@@ -28,14 +36,6 @@ const install = function (Vue, opts = {}) {
     Vue.prototype.$toast = null;
     Vue.prototype.$loading = null;
     Vue.prototype.$modal = null;
-
-    //base information
-    const ax = {};
-    ax.config = config;
-    ax.lang = opts.lang;
-    ax.version = config.version;
-    Vue.prototype.$ax = ax;
-
 }
 
 // auto install & browser import mode

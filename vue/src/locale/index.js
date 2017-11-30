@@ -27,6 +27,7 @@ export default {
         for (let i = 0; i < len; i++) {
             let key = arr[i];
             let tmp = snipetObj[key];
+
             if (i === len - 1) {
                 return format(tmp, opts)
             }

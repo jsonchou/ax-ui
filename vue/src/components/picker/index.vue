@@ -1,9 +1,18 @@
 <template>
     <div :class="cls+'-wrapper'">
         <div :class="cls">
-            <div class="clearfix" :class="cls+'-title'">
+            <div class="clearfix" :class="cls+'-tit'">
                 <span class="l" @click="onCancel">{{cancel}}</span>
                 <span class="r" @click="onConfirm">{{confirm}}</span>
+            </div>
+            <div class="clearfix" :class="cls+'-cnt'">
+                <div :class="cls+'-cnt-box'">
+                    <div class="item">
+                        <div class="ul">
+                            <li v-for="(item,index) in source">{{item}}</li>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -23,11 +32,7 @@
             return {
                 cancel: '',
                 confirm: '',
-                source: [
-                    [],
-                    [],
-                    []
-                ],
+                source: ['北京', '上海', '深圳'],
                 cls: `${prefix}-picker`,
                 styles: {}
             };

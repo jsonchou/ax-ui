@@ -5,6 +5,8 @@ import index from '../pages/index'
 import picker from '../pages/picker'
 import scroll from '../pages/scroll'
 import calendar from '../pages/calendar'
+import toast from '../pages/toast'
+
 
 const router = new VueRouter({
     mode: 'hash', //history
@@ -24,6 +26,10 @@ const router = new VueRouter({
         path: '/calendar',
         component: calendar,
         name: 'calendar'
+    }, {
+        path: '/toast',
+        component: toast,
+        name: 'toast'
     }]
 })
 

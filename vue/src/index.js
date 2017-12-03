@@ -5,11 +5,14 @@ import locale from './locale/index';
 import calendar from './components/calendar';
 import picker from './components/picker';
 import scroll from './components/scroll';
+import toast from './components/toast';
+
 
 const components = {
     calendar,
     picker,
-    scroll
+    scroll,
+    toast
 }
 
 const install = function (Vue, opts = {}) {
@@ -25,7 +28,6 @@ const install = function (Vue, opts = {}) {
     ax.lang = opts.lang;
     ax.version = config.version;
     Vue.prototype.$ax = ax;
-
 
     //bind component
     Object.values(components).forEach(comp => {

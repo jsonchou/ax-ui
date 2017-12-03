@@ -1,5 +1,5 @@
 <template>
-    <div :class="[cls+'-wrapper',show?'on':'']">
+    <div :class="[cls+'-wrapper',visible?'on':'']">
         <div :class="cls">
             <div>
                 {{msg}}
@@ -36,12 +36,13 @@
 
     export default {
         name: 'Toast',
+        mixins: Object.values(baseMixin),
         props: {
             msg: {
                 type: String,
                 default: ''
             },
-            show: {
+            visible: {
                 type: Boolean,
                 default: false,
             }
@@ -52,7 +53,7 @@
             };
         },
         watch: {
-            show(val, oldVal) {
+            visibleF(val, oldVal) {
                 let me = this;
                 if (val) {
                     console.log(2)
@@ -73,7 +74,7 @@
         },
         mounted() {
             let me = this;
-            console.log('template-toast:', me)
+            console.log('compoent-toast:', me)
             me.init();
         }
     }

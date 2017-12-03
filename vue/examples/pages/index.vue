@@ -1,6 +1,6 @@
 <template>
     <div class="template-index">
-        <ax-toast :msg="toast.msg" :show="toast.show"></ax-toast>
+        <ax-toast :msg="toast.msg" :visible="toast.visible"></ax-toast>
         <input class="f26" type="button" @click="onToast" value="点击" />
     </div>
 </template>
@@ -17,7 +17,7 @@
             return {
                 toast: {
                     msg: '',
-                    show: false,
+                    visible: false,
                 },
                 visible: false
             }
@@ -25,7 +25,7 @@
         methods: {
             onToast(e) {
                 let me = this;
-                me.toast = Object.assign(me.toast, {
+                me.toast = Object.assign({}, me.toast, {
                     msg: 'hehe show',
                     show: true
                 })
@@ -33,6 +33,7 @@
         },
         mounted() {
             let me = this;
+            console.log('page-index:', me)
         }
     }
 </script>

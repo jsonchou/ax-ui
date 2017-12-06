@@ -26,7 +26,8 @@ console.log('---------------------------\n');
 //set base loaders
 let myLoaders = [{
         test: /\.(png|jpg|woff|woff2|eot|ttf|svg)$/,
-        include: path.resolve(__dirname, spa),
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, '..', spa),
         use: [{
             loader: "url-loader",
             options: {
@@ -36,25 +37,25 @@ let myLoaders = [{
     },
     {
         test: /\.css$/,
-        include: path.resolve(__dirname, spa),
-        use: ["style-loader", "css-loader", "postcss-loader"]
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader", "autoprefixer-loader"]
     },
     {
         test: /\.scss$/,
-        include: path.resolve(__dirname, spa),
-        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"]
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader", "sass-loader"]
     },
     {
         test: /\.less$/,
-        include: path.resolve(__dirname, spa),
-        use: ["style-loader", "css-loader", "postcss-loader", "less-loader"]
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader", "less-loader"]
     },
 ];
 
 if (spa == 'react') {
     let tmp = [{
         test: /\.js[x]$/,
-        include: path.resolve(__dirname, spa),
+        include: path.resolve(__dirname, '..', spa),
         exclude: /node_modules/,
         use: ['babel-loader']
     }, ];

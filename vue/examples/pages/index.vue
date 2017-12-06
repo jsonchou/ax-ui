@@ -19,7 +19,6 @@
                     msg: '',
                     visible: false,
                 },
-                visible: false
             }
         },
         methods: {
@@ -27,7 +26,7 @@
                 let me = this;
                 me.toast = Object.assign({}, me.toast, {
                     msg: 'hehe show',
-                    show: true
+                    visible: true
                 })
             }
         },

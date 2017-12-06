@@ -1,12 +1,12 @@
 export default {
     props: {
-        
+
     },
-    data() {
-        return {
-            visible: false
-        }
-    },
+    // data() {
+    //     return {
+    //         visible: false
+    //     }
+    // },
     methods: {
         show() {
             this.visible = true;

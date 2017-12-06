@@ -1,18 +1,18 @@
-// import './styles/index.scss';
+import './styles/index.scss';
 import config from './utils/config';
 import locale from './locale/index';
 
-import calendar from './components/calendar';
-import picker from './components/picker';
-import scroll from './components/scroll';
-import toast from './components/toast';
+import Calendar from './components/Calendar';
+import Picker from './components/Picker';
+import Scroll from './components/Scroll';
+import Toast from './components/Toast';
 
 
 const components = {
-    calendar,
-    picker,
-    scroll,
-    toast
+    Calendar,
+    Picker,
+    Scroll,
+    Toast
 }
 
 const install = function (Vue, opts = {}) {

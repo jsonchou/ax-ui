@@ -8,28 +8,6 @@
     </div>
 </template>
 
-<style scoped>
-    .ax-toast-wrapper {
-        font-size: 2.8rem;
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        color: #fff;
-        background: rgba(0, 0, 0, .5);
-        z-index: -1;
-        transform: translate3d(-50%, -50%, 0);
-        padding: 3rem 5rem;
-        text-align: center;
-        opacity: 0;
-        border-radius: 1.5rem;
-    }
-
-    .ax-toast-wrapper.on {
-        opacity: 1;
-        z-index: 1000;
-    }
-</style>
-
 <script>
     import baseMixin from '../../mixins/base'
     const prefix = "ax";
@@ -53,7 +31,7 @@
             };
         },
         watch: {
-            visibleF(val, oldVal) {
+            visible(val, oldVal) {
                 let me = this;
                 if (val) {
                     console.log(2)

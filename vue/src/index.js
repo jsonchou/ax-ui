@@ -7,6 +7,7 @@ import Picker from './components/Picker';
 import Scroll from './components/Scroll';
 import Toast from './components/Toast';
 
+console.log('Toast', Toast)
 
 const components = {
     Calendar,
@@ -35,7 +36,7 @@ const install = function (Vue, opts = {}) {
     })
 
     //inject base components
-    Vue.prototype.$toast = null;
+    Vue.prototype.$toast = Toast;
     Vue.prototype.$loading = null;
     Vue.prototype.$modal = null;
 }

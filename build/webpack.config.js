@@ -38,18 +38,32 @@ let myLoaders = [{
     {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "autoprefixer-loader"]
+        use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: ["css-loader", "autoprefixer-loader"]
+        }),
     },
     {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: ["css-loader", "sass-loader"]
+        }),
     },
     {
         test: /\.less$/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "less-loader"]
+        use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: ["css-loader", "less-loader"]
+        }),
     },
+    // {
+    //     test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+    //     exclude: /node_modules/,
+    //     loader: 'url-loader?limit=8192'
+    // },
 ];
 
 if (spa == 'react') {
@@ -77,7 +91,9 @@ if (spa == 'react') {
 }
 
 let plugins = [
-    // new HappyPack({ id: 'happybabel', loaders: ['babel-loader'], threadPool: happyThreadPool, cache: true, verbose: true }),
+    new ExtractTextPlugin({
+        filename: `dist/[name].css`,
+    }),
     new webpack.optimize.CommonsChunkPlugin({
         name: "vendors",
         filename: `dist/[name].js`,

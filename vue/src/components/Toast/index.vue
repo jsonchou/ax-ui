@@ -2,7 +2,7 @@
     <transition :name="cls+'ani-std'">
         <div :class="[cls]">
             <div :class="[cls+'-container',cls+'-'+theme,visible?'on':'']">
-                <i :class="'ax-icon-'+theme">111</i>
+                <i :class="['ax','ax-'+theme]">111</i>
                 <div>
                     {{content}}
                 </div>

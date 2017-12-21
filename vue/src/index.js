@@ -1,4 +1,4 @@
-import './styles/ax.scss';
+import './styles/index.scss';
 import config from './utils/config';
 import locale from './locale/index';
 

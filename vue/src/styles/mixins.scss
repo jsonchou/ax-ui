@@ -1,0 +1,19 @@
+
+@mixin ax-icon() {
+    display: inline-block;
+    font: normal normal normal #{$ax-size}/#{$ax-line} FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+@mixin ax-icon-rotate($degrees, $rotation) {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$rotation})";
+            transform: rotate($degrees);
+  }
+
+  @mixin ax-icon-flip($horiz, $vert, $rotation) {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$rotation}, mirror=1)";
+            transform: scale($horiz, $vert);
+  }

@@ -1,0 +1,9 @@
+@font-face { font-family: 'ax'; 
+    src: url('#{$ax-path}/ax-webfont.eot?v=#{$ax-version}'); 
+    src: url('#{$ax-path}/ax-webfont.eot?#iefix&v=#{$ax-version}') format('embedded-opentype'),
+    url('#{$ax-path}/ax-webfont.woff2?v=#{$ax-version}') format('woff2'),
+    url('#{$ax-path}/ax-webfont.woff?v=#{$ax-version}') format('woff'),
+    url('#{$ax-path}/ax-webfont.ttf?v=#{$ax-version}') format('truetype'),
+    url('#{$ax-path}/ax-webfont.svg?v=#{$ax-version}#axregular') format('svg'); font-weight: normal; font-style: normal; } 
+    
+    //  src: url('#{$fa-font-path}/ax.otf') format('opentype'); // used when developing fonts

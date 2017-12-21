@@ -1,1 +1,9 @@
-// @prefix= 'ax'
+
+.#{$ax-prefix} {
+    display: inline-block;
+    font: normal normal normal #{$ax-size}/#{$ax-line} ax; 
+    font-size: inherit; 
+    text-rendering: auto; 
+    -webkit-font-smoothing: antialiased;
+  }
+  

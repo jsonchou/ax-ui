@@ -16,10 +16,11 @@ const Wrapper = function (opt = {}) {
 
     params.duration = parseInt(opt.duration || 1600);
     params.content = typeof opt === 'string' ? opt : (opt.content || opt.msg || opt.message);
-    params.position = opt.position || 'top left';
-    params.theme = opt.theme || 'info'
+    params.theme = opt.theme || 'info';
 
-    _ex = new EX(params);
+    _ex = new EX({
+        data: params
+    });
 
     console.log('params', _ex)
 
@@ -33,7 +34,7 @@ const Wrapper = function (opt = {}) {
 };
 
 ["info", "warn", "error", "success", "loading"].map(item => {
-    Wrapper[item] = (opt) => {
+    Wrapper[item] = function (opt) {
         if (typeof opt === 'string' || typeof opt === 'number') {
             opt = {
                 content: opt + ''
@@ -44,4 +45,4 @@ const Wrapper = function (opt = {}) {
     }
 });
 
-export default Wrapper
+export default Wrapper;

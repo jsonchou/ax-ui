@@ -1,4 +1,4 @@
-import './styles/index.scss';
+import './styles/ax.scss';
 import config from './utils/config';
 import locale from './locale/index';
 
@@ -6,8 +6,6 @@ import Calendar from './components/Calendar';
 import Picker from './components/Picker';
 import Scroll from './components/Scroll';
 import Toast from './components/Toast';
-
-console.log('Toast', Toast)
 
 const components = {
     Calendar,
@@ -33,6 +31,7 @@ const install = function (Vue, opts = {}) {
     //bind component
     Object.values(components).forEach(comp => {
         Vue.component(config.prefix + comp.name, comp); //standard mode
+        console.log('Toast', comp)
     })
 
     //inject base components

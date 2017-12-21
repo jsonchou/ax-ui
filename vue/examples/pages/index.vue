@@ -8,13 +8,16 @@
     export default {
         data() {
             return {
-              
+
             }
         },
         methods: {
             onToast(e) {
                 let me = this;
-                console.log(me.$toast('hehe'))
+                console.log(me.$toast({
+                    msg: 'hehe',
+                    duration: 10000000
+                }))
             }
         },
         mounted() {

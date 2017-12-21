@@ -1,0 +1,4 @@
+.#{$ax-prefix}-info:before { content: $ax-var-info; }
+.#{$ax-prefix}-success:before { content: $ax-var-success; }
+.#{$ax-prefix}-warn:before { content: $ax-var-warn; }
+.#{$ax-prefix}-error:before { content: $ax-var-error; }

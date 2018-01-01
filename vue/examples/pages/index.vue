@@ -14,10 +14,12 @@
         methods: {
             onToast(e) {
                 let me = this;
-                console.log(me.$toast.success({
-                    msg: 'hehe',
-                    duration: 10000000
-                }))
+                me.$toast.success({
+                    msg: '请填写您的手机号码',
+                    onClose(comp) {
+                        // console.log(comp)
+                    },
+                })
             }
         },
         mounted() {

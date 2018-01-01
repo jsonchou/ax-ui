@@ -2,10 +2,8 @@
     <transition :name="cls+'ani-std'">
         <div :class="[cls]">
             <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'']">
-                <i :class="['ax','ax-'+icon]">111</i>
-                <div>
-                    {{content}}
-                </div>
+                <i :class="['ax','ax-'+icon]"></i>
+                <div v-html="content"></div>
             </div>
         </div>
     </transition>
@@ -14,24 +12,16 @@
 <script>
     const prefix = "ax";
 
-    const theme = {
-        'info': 'fa fa-info',
-        'success': 'fa check',
-        'warn': 'fa warn',
-        'error': 'fa close',
-        'loading': 'fa spinner'
-    };
-
     export default {
         name: 'Toast',
         data() {
             return {
                 cls: `${prefix}-toast`,
-                content: 'default content',
+                content: '',
                 icon: '',
                 duration: 1600,
                 visible: '',
-                callback: null,
+                onClose: null,
                 axTimer: null, //
             };
         },
@@ -39,43 +29,60 @@
             axClose() {
                 let me = this;
                 me.axDestory();
-                me.callback && me.callback();
+                me.onClose && me.onClose(me);
+                //me.$emit('close');
             },
             axStartTimer() {
                 let me = this;
                 if (me.duration) {
                     me.axTimer = setTimeout(() => {
+                        alert(1)
                         me.axClose();
-                    }, me.duration)
+                    }, me.duration);
                 }
+            },
+            axStartListener() {
+                let me = this;
+                document.addEventListener('keydown', me.axKeyClose);
             },
             axClearTimer() {
                 let me = this;
-                me.timer && clearTimeout(me.timer)
+                clearTimeout(me.axTimer);
+            },
+            axClearListener() {
+                let me = this;
+                document.removeEventListener('keydown', me.axKeyClose);
             },
             axKeyClose(e) {
                 let me = this;
-                if (e.keyCode === 27) {
+                if (e.keyCode === 27 && me.visible) {
                     me.axClose();
                 }
             },
             axDestory() {
                 let me = this;
-                me.$el.parentNode.removeChild(me.$el);
+                let pNode = me.$el.parentNode;
+                me.axClearTimer();
+                me.$destroy(true);
+                me.axClearListener();
+                pNode && pNode.removeChild(me.$el);
             },
             axInit() {
                 let me = this;
-                this.axStartTimer();
+                me.axStartTimer();
+                me.axStartListener();
             },
         },
         mounted() {
             let me = this;
             me.axInit();
-            document.addEventListener('keydown', me.axKeyClose)
         },
         beforeDestory() {
             let me = this;
-            document.removeEventListener('keydown', me.axKeyClose)
+            me.axDestory();
         }
     }
 </script>
+
+<!-- ax为内部事件 -->
+<!-- 非ax为外部用户事件 -->

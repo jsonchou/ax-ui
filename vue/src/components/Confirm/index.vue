@@ -29,10 +29,10 @@
         data() {
             return {
                 cls: `${prefix}-confirm`,
-                title: '',
+                title: '提示',
                 content: '',
-                icon: '',
-                visible: '',
+                icon: 'info',
+                visible: false,
 
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
@@ -49,8 +49,19 @@
                 onCancle: null,
                 onConfirm: null,
                 //-------------------------------------
-
             };
+        },
+        watch: {
+            visible(nv, ov) {
+                let me = this;
+                if (me.showMask) {
+                    if (nv) {
+                        me.$mask.show();
+                    } else {
+                        me.$mask.hide();
+                    }
+                }
+            }
         },
         methods: {
             axClose() {
@@ -84,6 +95,7 @@
             },
             axDestory() {
                 let me = this;
+                me.visible = false;
                 let pNode = me.$el.parentNode;
                 me.$destroy(true);
                 me.axClearListener();

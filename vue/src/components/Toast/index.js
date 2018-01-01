@@ -18,7 +18,6 @@ const Wrapper = function (opt = {}) {
 
     params.duration = parseInt(opt.duration || 1600);
     params.content = typeof opt === 'string' ? opt : (opt.content || opt.msg || opt.message);
-    params.icon = opt.icon || 'info';
 
     _ex = new EX({
         data: params

@@ -16,9 +16,6 @@ const Wrapper = function (opt = {}) {
 
     let params = Object.assign({}, params, opt);
 
-    params.visible = opt.visible || false;
-    params.opacity = 'dark' || 'light' || 'transparent';
-
     _ex = new EX({
         data: params
     });
@@ -53,3 +50,5 @@ Wrapper.hide = (opt = {}) => {
 }
 
 export default Wrapper;
+
+//mask show & hide must be the same vue node

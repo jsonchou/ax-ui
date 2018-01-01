@@ -17,9 +17,7 @@ const Wrapper = function (opt = {}) {
     let params = Object.assign({}, params, opt);
 
     //缺省配置
-    params.title = opt.title || '提示';
     params.content = typeof opt === 'string' ? opt : (opt.content || opt.msg || opt.message);
-    params.icon = opt.icon || 'info';
 
     _ex = new EX({
         data: params

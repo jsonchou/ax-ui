@@ -10,13 +10,24 @@
     export default {
         data() {
             return {
-                
+
             }
         },
         methods: {
             onMask(e) {
                 let me = this;
-                me.$mask.show();
+                me.$mask.show((mask) => {
+                    me.$toast({
+                        duration: 3000,
+                        msg: '3秒后mask关闭',
+                        onClose(toast) {
+                            mask.hide(() => {
+                                toast.hide()
+                            })
+                        }
+                    });
+
+                });
             },
             onToast(e) {
                 let me = this;
@@ -30,7 +41,7 @@
             onConfirm(e) {
                 let me = this;
                 me.$confirm({
-                    title:'提示',
+                    title: '提示',
                     msg: '请填写您的手机号码',
                     onClose(comp) {
                         me.$toast('你关闭了弹窗')

@@ -1,7 +1,6 @@
 <template>
     <transition :name="cls+'-ani-std'">
-        <div :class="[cls,visible?'on':'',opacity]">
-        </div>
+        <div :class="[cls,visible?'on':'',opacity]" @click="axClose"></div>
     </transition>
 </template>
 
@@ -15,16 +14,21 @@
                 cls: `${prefix}-mask`,
                 visible: '',
                 opacity: 'dark',//dark,light,transparent
-                onClose: null,
+                onShow: null,
+                onHide: null,
                 //-------------------------------------
                 axTimer: null, //
             };
         },
         methods: {
+            hide() {
+                let me = this;
+                me.axClose();
+            },
             axClose() {
                 let me = this;
                 me.axDestory();
-                me.onClose && me.onClose(me);
+                me.onHide && me.onHide(me);
                 //me.$emit('close');
             },
             axStartListener() {
@@ -51,6 +55,7 @@
             axInit() {
                 let me = this;
                 me.axStartListener();
+                me.onShow && me.onShow(me);
             },
         },
         mounted() {

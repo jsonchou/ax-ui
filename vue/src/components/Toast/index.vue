@@ -18,7 +18,7 @@
             return {
                 cls: `${prefix}-toast`,
                 content: '',
-                icon: '',
+                icon: 'info',
                 duration: 1600,
                 visible: '',
                 onClose: null,
@@ -27,6 +27,10 @@
             };
         },
         methods: {
+            hide() {
+                let me = this;
+                me.axClose();
+            },
             axClose() {
                 let me = this;
                 me.axDestory();

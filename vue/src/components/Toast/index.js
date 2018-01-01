@@ -16,7 +16,7 @@ const Wrapper = function (opt = {}) {
 
     params.duration = parseInt(opt.duration || 1600);
     params.content = typeof opt === 'string' ? opt : (opt.content || opt.msg || opt.message);
-    params.theme = opt.theme || 'info';
+    params.icon = opt.icon || 'info';
 
     _ex = new EX({
         data: params
@@ -40,7 +40,7 @@ const Wrapper = function (opt = {}) {
                 content: opt + ''
             };
         }
-        opt.theme = item;
+        opt.icon = item;
         return Wrapper(opt)
     }
 });

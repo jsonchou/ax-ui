@@ -24,17 +24,7 @@ console.log(`${spa.toUpperCase()} PROJECT`);
 console.log('---------------------------\n');
 
 //set base loaders
-let myLoaders = [{
-        test: /\.(png|jpg|woff|woff2|eot|ttf|svg)$/,
-        exclude: /node_modules/,
-        include: path.resolve(__dirname, '..', spa),
-        use: [{
-            loader: "url-loader",
-            options: {
-                limit: 8129
-            }
-        }]
-    },
+let myLoaders = [
     {
         test: /\.css$/,
         exclude: /node_modules/,
@@ -59,11 +49,20 @@ let myLoaders = [{
             use: ["css-loader", "less-loader"]
         }),
     },
-    // {
-    //     test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
-    //     exclude: /node_modules/,
-    //     loader: 'url-loader?limit=8192'
-    // },
+    {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, '..', spa),
+        use: [{
+            loader: "file-loader",
+            options: {
+                publicPath: `/${spa}/dist/fonts/`,
+                name(file) {
+                    return `[name].[ext]`
+                }
+            }
+        }]
+    }
 ];
 
 if (spa == 'react') {
@@ -72,20 +71,20 @@ if (spa == 'react') {
         include: path.resolve(__dirname, '..', spa),
         exclude: /node_modules/,
         use: ['babel-loader']
-    }, ];
+    },];
     myLoaders = myLoaders.concat(tmp)
     myAlias = {};
 } else if (spa == 'vue') {
     let tmp = [{
-            test: /\.js$/,
-            exclude: /node_modules|vue\/dist|vue-hot-reload-api|vue-loader/,
-            use: ['babel-loader']
-        },
-        {
-            test: /\.vue$/,
-            exclude: /node_modules/,
-            use: ['vue-loader']
-        },
+        test: /\.js$/,
+        exclude: /node_modules|vue\/dist|vue-hot-reload-api|vue-loader/,
+        use: ['babel-loader']
+    },
+    {
+        test: /\.vue$/,
+        exclude: /node_modules/,
+        use: ['vue-loader']
+    },
     ];
     myLoaders = myLoaders.concat(tmp)
 }
@@ -133,7 +132,7 @@ module.exports = {
     //debug: process.env.NODE_ENV === 'development' ? true : false,//#source-map|#cheap-module-eval-source-map|eval
     devtool: env === 'p' ? false : 'eval',
     entry: {
-        'ax': `../${spa}/examples/main.js${spa==='react'?'x':''}`,
+        'ax': `../${spa}/examples/main.js${spa === 'react' ? 'x' : ''}`,
         vendors: [`${spa}`, `${spa}-router`]
     },
     output: {

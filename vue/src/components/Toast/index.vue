@@ -1,8 +1,8 @@
 <template>
     <transition :name="cls+'ani-std'">
         <div :class="[cls]">
-            <div :class="[cls+'-container',cls+'-'+theme,visible?'on':'']">
-                <i :class="['ax','ax-'+theme]">111</i>
+            <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'']">
+                <i :class="['ax','ax-'+icon]">111</i>
                 <div>
                     {{content}}
                 </div>
@@ -16,10 +16,10 @@
 
     const theme = {
         'info': 'fa fa-info',
-        'success': 'check',
-        'warn': 'warn',
-        'error': 'close',
-        'loading': 'spinner'
+        'success': 'fa check',
+        'warn': 'fa warn',
+        'error': 'fa close',
+        'loading': 'fa spinner'
     };
 
     export default {
@@ -28,7 +28,7 @@
             return {
                 cls: `${prefix}-toast`,
                 content: 'default content',
-                theme: '',
+                icon: '',
                 duration: 1600,
                 visible: '',
                 callback: null,

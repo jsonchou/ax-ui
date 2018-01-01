@@ -6,12 +6,14 @@ import Calendar from './components/Calendar';
 import Picker from './components/Picker';
 import Scroll from './components/Scroll';
 import Toast from './components/Toast';
+import Confirm from './components/Confirm';
 
 const components = {
     Calendar,
     Picker,
     Scroll,
-    Toast
+    Toast,
+    Confirm
 }
 
 const install = function (Vue, opts = {}) {
@@ -36,6 +38,8 @@ const install = function (Vue, opts = {}) {
 
     //inject base components
     Vue.prototype.$toast = Toast;
+    Vue.prototype.$confirm = Confirm;
+    
     Vue.prototype.$loading = null;
     Vue.prototype.$modal = null;
 }

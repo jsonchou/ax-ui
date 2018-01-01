@@ -1,6 +1,7 @@
 <template>
     <div class="template-index">
-        <input class="f26" type="button" @click="onToast" value="点击" />
+        <input class="f26" type="button" @click="onToast" value="点击onToast" />
+        <input class="f26" type="button" @click="onConfirm" value="点击onConfirm" />
     </div>
 </template>
 
@@ -16,6 +17,16 @@
                 let me = this;
                 me.$toast.success({
                     msg: '请填写您的手机号码',
+                    onClose(comp) {
+                        // console.log(comp)
+                    },
+                })
+            },
+            onConfirm(e) {
+                let me = this;
+                me.$confirm({
+                    msg: '请填写您的手机号码',
+                    duration: 1000000,
                     onClose(comp) {
                         // console.log(comp)
                     },

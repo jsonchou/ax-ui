@@ -1,9 +1,25 @@
 <template>
     <transition :name="cls+'-ani-std'">
-        <div :class="[cls]">
-            <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'']">
-                <i :class="['ax','ax-'+icon]"></i>
-                <div v-html="content"></div>
+        <div :class="[cls+'-container',visible?'on':'']">
+            <div :class="[cls+'-inner']">
+                <div :class="[cls+'-box',cls+'-'+icon]">
+                    <button type="button" class="close" @click="axClose">
+                        <i class="ax ax-close"></i>
+                    </button>
+                    <div class="title">
+                        <span>提示</span>
+                    </div>
+                    <div class="content">
+                        <i :class="['ax','ax-'+icon]"></i>
+                        <div class="message">
+                            <p>此操作将永久删除该文件, 是否继续?</p>
+                        </div>
+                    </div>
+                </div>
+                <div :class="[cls+'-control']">
+                    <button type="button" class="el-button " @click="axClose">取消</button>
+                    <button type="button" class="el-button " @click="axClose">确定</button>
+                </div>
             </div>
         </div>
     </transition>
@@ -13,15 +29,17 @@
     const prefix = "ax";
 
     export default {
-        name: 'Toast',
+        name: 'Confirm',
         data() {
             return {
-                cls: `${prefix}-toast`,
+                cls: `${prefix}-confirm`,
                 content: '',
                 icon: '',
                 duration: 1600,
                 visible: '',
                 onClose: null,
+                onCancle: null,
+                onConfirm: null,
                 //-------------------------------------
                 axTimer: null, //
             };

@@ -1,8 +1,15 @@
 $ax:ax; 
+
+// Base UI
+
+
 $toast:ax-toast; 
+$confirm:ax-confirm; 
 $picker:ax-picker; 
 $calendar:ax-calendar; 
 $scroll:ax-scroll; 
+
+
 
 .#{$ax}-mask { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, .4); z-index: 999; 
     &.light { background-color: hsla(0, 0%, 100%, .3)}
@@ -13,3 +20,19 @@ $scroll:ax-scroll;
 .#{$toast}-container { font-size: 2.8rem; position: fixed; left: 50%; top: 50%; color: #fff; background: rgba(0, 0, 0, .5); z-index: -1; transform: translate3d(-50%, -50%, 0); padding: 2.5rem 5rem; text-align: center; opacity: 0; border-radius: 1rem; display: flex; align-items: center; justify-content: center; white-space: nowrap; 
     &.on { opacity: 1; z-index: 1000; }
 }
+
+.#{$confirm}-container { font-size: 2.8rem; z-index: -1; opacity: 0; position: fixed; left: 0; top: 0; width: 100%; height: 100%; 
+    &.on { opacity: 1; z-index: 1000; 
+        &::after{position: fixed; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background: #000; opacity: 0.5; content:' ' }
+    }
+    >.#{$confirm}-inner{position: fixed; left: 50%; top: 50%; transform: translate3d(-50%, -50%, 0); max-width: 65rem; min-width: 42rem; border-radius: 1rem; z-index: 1001; background-color: #ffffff; 
+        .#{$confirm}-box {
+            > .title{padding: 2.5rem 2.5rem; font-size:2.8rem }
+            > .content{display: flex; align-items: center; justify-content: center; padding: 0 2.5rem; }
+            > .close {position: absolute; right: 1rem; top: 1rem; width: 5rem; height: 5rem; }
+        }
+        .#{$confirm}-control{text-align: right; padding: 0 2.5rem 2.5rem; 
+            button{font-size:2.6rem; font-size:2.6rem; }
+        }
+    }
+    }

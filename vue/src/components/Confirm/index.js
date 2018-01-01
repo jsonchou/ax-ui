@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Toast from './index.vue'
+import Confirm from './index.vue'
 
-let EX = Vue.extend(Toast); //默认实例
+let EX = Vue.extend(Confirm); //默认实例
 
 let _ex;
 

@@ -14,12 +14,12 @@ const Wrapper = function (opt = {}) {
         return;
     }
 
-    let params = {};
+    let params = Object.assign({}, params, opt);
 
-    params.duration = parseInt(opt.duration || 1600);
+    //缺省配置
+    params.title = opt.title || '提示';
     params.content = typeof opt === 'string' ? opt : (opt.content || opt.msg || opt.message);
     params.icon = opt.icon || 'info';
-    params.onClose = opt.onClose || null;
 
     _ex = new EX({
         data: params
@@ -37,7 +37,7 @@ const Wrapper = function (opt = {}) {
 };
 
 ["info", "warn", "error", "success", "loading"].map(item => {
-    Wrapper[item] = function (opt) {
+    Wrapper[item] = (opt = {}) => {
         if (typeof opt === 'string' || typeof opt === 'number') {
             opt = {
                 content: opt + ''

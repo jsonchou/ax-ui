@@ -8,13 +8,14 @@ $confirm:ax-confirm;
 $picker:ax-picker; 
 $calendar:ax-calendar; 
 $scroll:ax-scroll; 
+$mask:ax-mask; 
 
 
-
-.#{$ax}-mask { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, .4); z-index: 999; 
+.#{$ax}-mask { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: -1; 
     &.light { background-color: hsla(0, 0%, 100%, .3)}
     &.dark { background-color: rgba(0, 0, 0, .7)}
     &.transparent { background-color: transparent; }
+    &.on{z-index: 1000; }
 }
 
 .#{$toast}-container { font-size: 2.8rem; position: fixed; left: 50%; top: 50%; color: #fff; background: rgba(0, 0, 0, .5); z-index: -1; transform: translate3d(-50%, -50%, 0); padding: 2.5rem 5rem; text-align: center; opacity: 0; border-radius: 1rem; display: flex; align-items: center; justify-content: center; white-space: nowrap; 
@@ -22,9 +23,7 @@ $scroll:ax-scroll;
 }
 
 .#{$confirm}-container { font-size: 2.8rem; z-index: -1; opacity: 0; position: fixed; left: 0; top: 0; width: 100%; height: 100%; 
-    &.on { opacity: 1; z-index: 1000; 
-        &::after{position: fixed; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background: #000; opacity: 0.5; content:' ' }
-    }
+    &.on { opacity: 1; z-index: 1000; }
     >.#{$confirm}-inner{position: fixed; left: 50%; top: 50%; transform: translate3d(-50%, -50%, 0); max-width: 65rem; min-width: 42rem; border-radius: 1rem; z-index: 1001; background-color: #ffffff; 
         .#{$confirm}-box {
             > .title{padding: 2.5rem 2.5rem; font-size:2.8rem }

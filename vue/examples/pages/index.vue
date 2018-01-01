@@ -2,6 +2,7 @@
     <div class="template-index">
         <input class="f26" type="button" @click="onToast" value="点击onToast" />
         <input class="f26" type="button" @click="onConfirm" value="点击onConfirm" />
+        <input class="f26" type="button" @click="onMask" value="点击onMask" />
     </div>
 </template>
 
@@ -9,10 +10,14 @@
     export default {
         data() {
             return {
-
+                
             }
         },
         methods: {
+            onMask(e) {
+                let me = this;
+                me.$mask.show();
+            },
             onToast(e) {
                 let me = this;
                 me.$toast.success({
@@ -25,10 +30,16 @@
             onConfirm(e) {
                 let me = this;
                 me.$confirm({
+                    title:'提示',
                     msg: '请填写您的手机号码',
-                    duration: 1000000,
                     onClose(comp) {
-                        // console.log(comp)
+                        me.$toast('你关闭了弹窗')
+                    },
+                    onCancle(comp) {
+                        me.$toast('你取消了操作')
+                    },
+                    onConfirm(comp) {
+                        me.$toast('你的操作成功')
                     },
                 })
             }

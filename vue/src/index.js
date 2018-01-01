@@ -8,12 +8,15 @@ import Scroll from './components/Scroll';
 import Toast from './components/Toast';
 import Confirm from './components/Confirm';
 
+import Mask from './components/Mask';
+
 const components = {
     Calendar,
     Picker,
     Scroll,
     Toast,
-    Confirm
+    Confirm,
+    Mask,
 }
 
 const install = function (Vue, opts = {}) {
@@ -32,13 +35,14 @@ const install = function (Vue, opts = {}) {
 
     //bind component
     Object.values(components).forEach(comp => {
-        Vue.component(config.prefix + comp.name, comp); //standard mode
+        Vue.component(comp.name, comp); //standard mode
         console.log('Toast', comp)
     })
 
     //inject base components
     Vue.prototype.$toast = Toast;
     Vue.prototype.$confirm = Confirm;
+    Vue.prototype.$mask = Mask;
     
     Vue.prototype.$loading = null;
     Vue.prototype.$modal = null;

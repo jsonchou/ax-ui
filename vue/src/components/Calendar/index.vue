@@ -1,9 +1,10 @@
 <template>
-        <div class="template-calendar">calendar</div>
-    </template>
+    <div class="template-calendar">calendar</div>
+</template>
 
 <script>
+    const prefix = "ax";
     export default {
-        name: 'Calendar',
+        name: `${prefix}Calendar`,
     }
 </script>

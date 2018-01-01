@@ -24,7 +24,7 @@
 
     export default {
         mixins: Object.values(baseMixin),
-        name: 'Picker',
+        name: `${prefix}Picker`,
         props: {
 
         },

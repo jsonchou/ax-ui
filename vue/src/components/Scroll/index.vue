@@ -3,7 +3,8 @@
 </template>
 
 <script>
+     const prefix = "ax";
     export default {
-        name: 'Scroll',
+        name: `${prefix}Scroll`,
     }
 </script>

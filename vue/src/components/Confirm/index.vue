@@ -3,22 +3,18 @@
         <div :class="[cls+'-container',visible?'on':'']">
             <div :class="[cls+'-inner']">
                 <div :class="[cls+'-box',cls+'-'+icon]">
-                    <button type="button" class="close" @click="axClose">
+                    <button type="button" class="close" @click="axClose" v-show="showClose">
                         <i class="ax ax-close"></i>
                     </button>
-                    <div class="title">
-                        <span>提示</span>
-                    </div>
+                    <div class="title" v-html="title"></div>
                     <div class="content">
                         <i :class="['ax','ax-'+icon]"></i>
-                        <div class="message">
-                            <p>此操作将永久删除该文件, 是否继续?</p>
-                        </div>
+                        <div class="message" v-html="content"></div>
                     </div>
                 </div>
                 <div :class="[cls+'-control']">
-                    <button type="button" class="el-button " @click="axClose">取消</button>
-                    <button type="button" class="el-button " @click="axClose">确定</button>
+                    <button type="button" class="el-button " @click="axCancle" v-show="showCancelButton">{{cancelButtonText}}</button>
+                    <button type="button" class="el-button " @click="axConfirm" v-show="showConfirmButton">{{confirmButtonText}}</button>
                 </div>
             </div>
         </div>
@@ -29,19 +25,31 @@
     const prefix = "ax";
 
     export default {
-        name: 'Confirm',
+        name: `${prefix}Confirm`,
         data() {
             return {
                 cls: `${prefix}-confirm`,
+                title: '',
                 content: '',
                 icon: '',
-                duration: 1600,
                 visible: '',
+
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                showClose: true,
+                showCancelButton: false,
+                showConfirmButton: true,
+
+                showMask: true,
+                closeOnClickMask: true,
+
+                esc: true,
+
                 onClose: null,
                 onCancle: null,
                 onConfirm: null,
                 //-------------------------------------
-                axTimer: null, //
+
             };
         },
         methods: {
@@ -49,23 +57,20 @@
                 let me = this;
                 me.axDestory();
                 me.onClose && me.onClose(me);
-                //me.$emit('close');
             },
-            axStartTimer() {
+            axCancle() {
                 let me = this;
-                if (me.duration) {
-                    me.axTimer = setTimeout(() => {
-                        me.axClose();
-                    }, me.duration);
-                }
+                me.axDestory();
+                me.onCancle && me.onCancle(me);
+            },
+            axConfirm() {
+                let me = this;
+                me.axDestory();
+                me.onConfirm && me.onConfirm(me);
             },
             axStartListener() {
                 let me = this;
                 document.addEventListener('keydown', me.axKeyClose);
-            },
-            axClearTimer() {
-                let me = this;
-                clearTimeout(me.axTimer);
             },
             axClearListener() {
                 let me = this;
@@ -73,21 +78,19 @@
             },
             axKeyClose(e) {
                 let me = this;
-                if (e.keyCode === 27 && me.visible) {
+                if (e.keyCode === 27 && me.visible && me.esc) {
                     me.axClose();
                 }
             },
             axDestory() {
                 let me = this;
                 let pNode = me.$el.parentNode;
-                me.axClearTimer();
                 me.$destroy(true);
                 me.axClearListener();
                 pNode && pNode.removeChild(me.$el);
             },
             axInit() {
                 let me = this;
-                me.axStartTimer();
                 me.axStartListener();
             },
         },

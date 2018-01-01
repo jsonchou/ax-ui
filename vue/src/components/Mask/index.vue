@@ -1,10 +1,6 @@
 <template>
     <transition :name="cls+'-ani-std'">
-        <div :class="[cls]">
-            <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'']">
-                <i :class="['ax','ax-'+icon]"></i>
-                <div v-html="content"></div>
-            </div>
+        <div :class="[cls,visible?'on':'',opacity]">
         </div>
     </transition>
 </template>
@@ -13,14 +9,12 @@
     const prefix = "ax";
 
     export default {
-        name: `${prefix}Toast`,
+        name: `${prefix}Mask`,
         data() {
             return {
-                cls: `${prefix}-toast`,
-                content: '',
-                icon: '',
-                duration: 1600,
+                cls: `${prefix}-mask`,
                 visible: '',
+                opacity: 'dark',//dark,light,transparent
                 onClose: null,
                 //-------------------------------------
                 axTimer: null, //
@@ -33,21 +27,9 @@
                 me.onClose && me.onClose(me);
                 //me.$emit('close');
             },
-            axStartTimer() {
-                let me = this;
-                if (me.duration) {
-                    me.axTimer = setTimeout(() => {
-                        me.axClose();
-                    }, me.duration);
-                }
-            },
             axStartListener() {
                 let me = this;
                 document.addEventListener('keydown', me.axKeyClose);
-            },
-            axClearTimer() {
-                let me = this;
-                clearTimeout(me.axTimer);
             },
             axClearListener() {
                 let me = this;
@@ -62,14 +44,12 @@
             axDestory() {
                 let me = this;
                 let pNode = me.$el.parentNode;
-                me.axClearTimer();
                 me.$destroy(true);
                 me.axClearListener();
                 pNode && pNode.removeChild(me.$el);
             },
             axInit() {
                 let me = this;
-                me.axStartTimer();
                 me.axStartListener();
             },
         },

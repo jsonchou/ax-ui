@@ -14,7 +14,7 @@
         methods: {
             onToast(e) {
                 let me = this;
-                console.log(me.$toast({
+                console.log(me.$toast.success({
                     msg: 'hehe',
                     duration: 10000000
                 }))

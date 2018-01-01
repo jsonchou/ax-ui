@@ -56,10 +56,9 @@ let myLoaders = [
         use: [{
             loader: "file-loader",
             options: {
-                publicPath: `/${spa}/dist/fonts/`,
-                name(file) {
-                    return `[name].[ext]`
-                }
+                publicPath: `/${spa}/`,
+                name: `dist/fonts/[name].[ext]`,
+                // outputPath
             }
         }]
     }

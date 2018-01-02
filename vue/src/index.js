@@ -32,15 +32,16 @@ const install = function (Vue, opts = {}) {
 
     //base information
     const ax = {};
-    ax.config = config;
-    ax.lang = opts.lang;
-    ax.version = config.version;
-    Vue.prototype.$ax = ax;
+    Object.assign(config, opts);
+    Object.assign(ax, config);
+    Vue.prototype.$ax = window.$ax = ax;
+
+    console.log('config', config)
+    console.log('ax', ax)
 
     //bind component
     Object.values(components).forEach(comp => {
         Vue.component(comp.name, comp); //standard mode
-        console.log('Toast', comp)
     })
 
     //inject base components
@@ -48,7 +49,6 @@ const install = function (Vue, opts = {}) {
     Vue.prototype.$confirm = Confirm;
     Vue.prototype.$mask = Mask;
 
-    Vue.prototype.$loading = null;
     Vue.prototype.$modal = null;
 }
 
@@ -59,6 +59,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
+    dddddddddd: 'hehe',
     install, //every component must have it's own install func
     ...components,
 }

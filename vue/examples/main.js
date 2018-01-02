@@ -17,7 +17,8 @@ if (typeof Object.assign != 'function') {
 Vue.config.devtools = true;
 
 Vue.use(ax, {
-    lang
+    lang,
+    version: '0.0.3'
 });
 
 Vue.use(VueRouter)

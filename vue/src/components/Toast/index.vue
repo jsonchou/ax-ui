@@ -1,8 +1,8 @@
 <template>
     <transition :name="cls+'-ani-std'">
         <div :class="[cls]">
-            <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'']">
-                <i :class="['ax','ax-'+icon]"></i>
+            <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'',vertical?'vertical':'',opacity,]">
+                <i v-show="mapIcon" :class="['ax-icon-'+mapIcon,icon=='loading'?'ax-icon-spin':'']"></i>
                 <div v-html="content"></div>
             </div>
         </div>
@@ -11,6 +11,13 @@
 
 <script>
     const prefix = "ax";
+    const mapIcons = {
+        info: 'info',
+        warn: 'warning',
+        error: 'error',
+        success: 'success',
+        loading: 'loading',
+    }
 
     export default {
         name: `${prefix}Toast`,
@@ -18,13 +25,21 @@
             return {
                 cls: `${prefix}-toast`,
                 content: '',
+                opacity: 'dark',
                 icon: 'info',
                 duration: 1600,
                 visible: '',
                 onClose: null,
+                vertical: false, //横向，水平
                 //-------------------------------------
                 axTimer: null, //
             };
+        },
+        computed: {
+            mapIcon() {
+                let me = this;
+                return mapIcons[me.icon] || ''
+            }
         },
         methods: {
             hide() {

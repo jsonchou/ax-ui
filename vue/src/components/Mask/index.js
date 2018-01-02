@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Mask from './index.vue'
+import Comp from './index.vue'
 
-let EX = Vue.extend(Mask); //默认实例
+let EX = Vue.extend(Comp); //默认实例
 
 let _ex;
 

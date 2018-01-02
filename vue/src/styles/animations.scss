@@ -1,5 +1,5 @@
-.#{$ax-prefix}-spin { animation: ax-ani-spin 2s infinite linear; }
-.#{$ax-prefix}-pulse { animation: ax-ani-spin 1s infinite steps(8); }
+.#{$ax-prefix}spin { animation: ax-ani-spin 2s infinite linear; }
+.#{$ax-prefix}pulse { animation: ax-ani-spin 1s infinite steps(8); }
 
 @keyframes ax-ani-spin {    
     0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }

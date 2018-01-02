@@ -13,7 +13,7 @@
             return {
                 cls: `${prefix}-mask`,
                 visible: '',
-                opacity: 'dark',//dark,light,transparent
+                opacity: 'dark', //dark,light,transparent
                 onShow: null,
                 onHide: null,
                 //-------------------------------------
@@ -60,6 +60,7 @@
         },
         mounted() {
             let me = this;
+            console.log('test config', me)
             me.axInit();
         },
         beforeDestory() {

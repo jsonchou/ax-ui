@@ -2,17 +2,10 @@ export default {
     props: {
 
     },
-    // data() {
-    //     return {
-    //         visible: false
-    //     }
-    // },
-    methods: {
-        // show() {
-        //     this.visible = true;
-        // },
-        // hide() {
-        //     this.visible = false;
-        // }
+    computed: {
+        iconPrefix() {
+            let me = this;
+            return me.$ax.prefix + '-icon'
+        }
     }
 }

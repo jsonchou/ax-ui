@@ -43,7 +43,7 @@ const install = function (Vue, opts = {}) {
     Vue.prototype.$toast = Toast;
     Vue.prototype.$confirm = Confirm;
     Vue.prototype.$mask = Mask;
-    
+
     Vue.prototype.$loading = null;
     Vue.prototype.$modal = null;
 }

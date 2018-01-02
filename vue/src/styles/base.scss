@@ -1,9 +1,3 @@
 
-.#{$ax-prefix} {
-    display: inline-block;
-    font: normal normal normal #{$ax-size}/#{$ax-line} ax; 
-    font-size: inherit; 
-    text-rendering: auto; 
-    -webkit-font-smoothing: antialiased;
-  }
-  
+[class*=" #{$ax-prefix}"],
+[class^="#{$ax-prefix}"] { font-family:ax!important; speak: none; font-style: normal; font-weight: 400; font-variant: normal; text-transform: none; line-height: 1; vertical-align: baseline; display: inline-block; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale}

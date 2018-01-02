@@ -2,21 +2,25 @@ import './styles/index.scss';
 import config from './utils/config';
 import locale from './locale/index';
 
-import Calendar from './components/Calendar';
-import Picker from './components/Picker';
-import Scroll from './components/Scroll';
+// BASE UI
+import Button from './components/Button';
+import Mask from './components/Mask';
 import Toast from './components/Toast';
 import Confirm from './components/Confirm';
 
-import Mask from './components/Mask';
+import Calendar from './components/Calendar';
+import Picker from './components/Picker';
+import Scroll from './components/Scroll';
 
 const components = {
+    Button,
+    Mask,
+    Toast,
+    Confirm,
+
     Calendar,
     Picker,
     Scroll,
-    Toast,
-    Confirm,
-    Mask,
 }
 
 const install = function (Vue, opts = {}) {

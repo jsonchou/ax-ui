@@ -14,7 +14,6 @@
             }
         },
         methods: {
-
             onMask(e) {
                 let me = this;
                 me.$mask.show((mask) => {
@@ -32,13 +31,9 @@
             },
             onToast(e) {
                 let me = this;
-                me.$toast.loading({
-                    msg: '载入中...',
-                    vertical: true,
-                    duration: 1000000,
-                    onClose(comp) {
-                        // console.log(comp)
-                    },
+                me.$toast.info({
+                    msg: '请填写您的手机号码',
+                    duration: 2000,
                 })
             },
             onConfirm(e) {

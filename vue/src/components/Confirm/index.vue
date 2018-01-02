@@ -4,17 +4,17 @@
             <div :class="[cls+'-inner']">
                 <div :class="[cls+'-box',cls+'-'+icon]">
                     <button type="button" class="close" @click="axClose" v-show="showClose">
-                        <i class="ax ax-close"></i>
+                        <i :class="[iconPrefix+ '-close']"></i>
                     </button>
                     <div class="title" v-html="title"></div>
                     <div class="content">
-                        <i :class="['ax','ax-'+icon]"></i>
+                        <i :class="[iconPrefix+'-'+icon]"></i>
                         <div class="message" v-html="content"></div>
                     </div>
                 </div>
                 <div :class="[cls+'-control']">
-                    <button type="button" class="el-button " @click="axCancle" v-show="showCancelButton">{{cancelButtonText}}</button>
-                    <button type="button" class="el-button " @click="axConfirm" v-show="showConfirmButton">{{confirmButtonText}}</button>
+                    <button class="el-button " @click="axCancle" v-show="showCancelButton">{{cancelButtonText}}</button>
+                    <button class="el-button " @click="axConfirm" v-show="showConfirmButton">{{confirmButtonText}}</button>
                 </div>
             </div>
         </div>
@@ -23,9 +23,15 @@
 
 <script>
     const prefix = "ax";
+    import baseMixin from '../../mixins/base'
+    import Button from '../Button'
 
     export default {
         name: `${prefix}Confirm`,
+        mixins: [baseMixin.std],
+        components: {
+            [`tmpButton`]: Button
+        },
         data() {
             return {
                 cls: `${prefix}-confirm`,

@@ -1,7 +1,7 @@
 <template>
-    <button class="el-button" @click="handleClick" :disabled="disabled" :autofocus="autofocus" :type="nativeType" :class="[
-        type ? 'el-button--' + type : '',
-        buttonSize ? 'el-button--' + buttonSize : '',
+    <button class="el-button" @click="axClick" :disabled="disabled" :autofocus="autofocus" :theme="theme" :class="[
+        theme ? iconPrefix+'-button-' + theme : '',
+        size ? iconPrefix+'-button-' + size : '',
         {
           'is-disabled': disabled,
           'is-loading': loading,
@@ -9,9 +9,8 @@
           'is-round': round
         }
       ]">
-        <i class="el-icon-loading" v-if="loading" @click="handleInnerClick"></i>
-        <i :class="icon" v-if="icon && !loading" @click="handleInnerClick"></i>
-        <span v-if="$slots.default" @click="handleInnerClick">
+        <i :class="[icon,loading?iconPrefix+'-spin':'']" v-if="icon && !loading"></i>
+        <span v-if="$slots.default">
             <slot></slot>
         </span>
     </button>
@@ -19,30 +18,62 @@
 
 <script>
     const prefix = "ax";
+    import baseMixin from '../../mixins/base'
+    import validator from '../../utils/validator'
 
     export default {
         name: `${prefix}Button`,
+        mixins: [baseMixin.std],
+        props: {
+            icon: {
+                type: String,
+                default: ''
+            },
+            theme: {
+                type: String,
+                validator: validator(['default', 'primary', 'info', 'success', 'warning', 'error']),
+                default: 'default',
+            },
+            size: {
+                type: String,
+                validator: validator(['xl', 'lg', 'sm', 'xs']),
+                default: null,
+            },
+            shape: {
+                type: String,
+                validator: validator(['radius', 'round', 'circle']),
+                default: null,
+            },
+            plain: {
+                type: Boolean,
+                default: false,
+            },
+            round: {
+                type: Boolean,
+                default: false,
+            },
+            autofocus: {
+                type: Boolean,
+                default: false,
+            },
+            disabled: {
+                type: Boolean,
+                default: false,
+            },
+            loading: {
+                type: Boolean,
+                default: false,
+            },
+        },
         data() {
             return {
-                cls: `${prefix}-button`,
-                visible: '',
-                opacity: 'dark', //dark,light,transparent
-                onShow: null,
-                onHide: null,
-                //-------------------------------------
-                axTimer: null, //
+
             };
         },
         methods: {
-            hide() {
+            axClick(e) {
                 let me = this;
-                me.axClose();
-            },
-            axClose() {
-                let me = this;
-                me.axDestory();
-                me.onHide && me.onHide(me);
-                //me.$emit('close');
+                me.$emit('click', e)
             },
             axStartListener() {
                 let me = this;
@@ -74,6 +105,7 @@
         mounted() {
             let me = this;
             me.axInit();
+            console.log('me', me)
         },
         beforeDestory() {
             let me = this;

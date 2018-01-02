@@ -1,13 +1,18 @@
-.#{$com-confirm}-container { font-size: 2.8rem; z-index: -1; opacity: 0; position: fixed; left: 0; top: 0; width: 100%; height: 100%; 
+.#{$com-confirm}-container { font-size: 2.8rem; z-index: -1; opacity: 0; @include cover; 
     &.on { opacity: 1; z-index: 1000; }
-    >.#{$com-confirm}-inner{position: fixed; left: 50%; top: 50%; transform: translate3d(-50%, -50%, 0); max-width: 65rem; min-width: 42rem; border-radius: 1rem; z-index: 1001; background-color: #ffffff; 
+    >.#{$com-confirm}-inner {
+        @include pop; max-width: 65rem; min-width: 42rem; border-radius: 1rem; z-index: 1001; background-color: #ffffff; 
         .#{$com-confirm}-box {
-            > .title{padding: 2.5rem 2.5rem; font-size:2.8rem }
-            > .content{display: flex; align-items: center; justify-content: center; padding: 0 2.5rem; }
-            > .close {position: absolute; right: 1rem; top: 1rem; width: 5rem; height: 5rem; }
+            >.title { padding: 2.5rem 2.5rem; font-size: 2.8rem}
+            >.content { @include flex; padding: 0 2.5rem; 
+                [class*=-icon-] { margin-right: 1rem; }
+            }
+            >.close { position: absolute; top: 1.5rem; right: 1.5rem; padding: 0; border: none; outline: none; background: transparent; font-size: 2.4rem; cursor: pointer; 
+                .ax-icon-close { font-size: 4.6rem; }
+            }
         }
-        .#{$com-confirm}-control{text-align: right; padding: 0 2.5rem 2.5rem; 
-            button{font-size:2.6rem; font-size:2.6rem; }
+        .#{$com-confirm}-control { text-align: right; padding: 0 2.5rem 2.5rem; 
+            button { font-size: 2.6rem; font-size: 2.6rem; }
         }
     }
 }

@@ -2,15 +2,17 @@
     <transition :name="cls+'-ani-std'">
         <div :class="[cls]">
             <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'',vertical?'vertical':'',opacity,]">
-                <i v-show="mapIcon" :class="['ax-icon-'+mapIcon,icon=='loading'?'ax-icon-spin':'']"></i>
+                <i v-show="mapIcon" :class="['ax-icon-'+mapIcon,icon==='loading'?'ax-icon-spin':'']"></i>
                 <div v-html="content"></div>
             </div>
+            <div v-show="mask" @click="axMaskClose" :class="['mask',maskOpacity]"></div>
         </div>
     </transition>
 </template>
 
 <script>
     const prefix = "ax";
+
     const mapIcons = {
         info: 'info',
         warn: 'warning',
@@ -26,9 +28,13 @@
                 cls: `${prefix}-toast`,
                 content: '',
                 opacity: 'dark',
-                icon: 'info',
+                icon: '',
                 duration: 1600,
                 visible: '',
+                mask: true,
+                maskOpacity: 'transparent',
+                closeOnClickModal: false,
+                asc: false,
                 onClose: null,
                 vertical: false, //横向，水平
                 //-------------------------------------
@@ -45,6 +51,12 @@
             hide() {
                 let me = this;
                 me.axClose();
+            },
+            axMaskClose() {
+                let me = this;
+                if (me.closeOnClickModal) {
+                    me.axClose();
+                }
             },
             axClose() {
                 let me = this;
@@ -74,13 +86,14 @@
             },
             axKeyClose(e) {
                 let me = this;
-                if (e.keyCode === 27 && me.visible) {
+                if (e.keyCode === 27 && me.visible && asc) {
                     me.axClose();
                 }
             },
             axDestory() {
                 let me = this;
                 let pNode = me.$el.parentNode;
+                me.mask = false;
                 me.axClearTimer();
                 me.$destroy(true);
                 me.axClearListener();

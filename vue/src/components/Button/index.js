@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Button from './index.vue'
+import Comp from './index.vue'
 
-let EX = Vue.extend(Button); //默认实例
+let EX = Vue.extend(Comp); //默认实例
 
 let _ex;
 

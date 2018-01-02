@@ -1,7 +1,14 @@
-
-.#{$com-toast}-container { font-size: 2.8rem; position: fixed; left: 50%; top: 50%; color: #fff; background: rgba(0, 0, 0, .5); z-index: -1; transform: translate3d(-50%, -50%, 0); padding: 2.5rem 5rem; text-align: center; opacity: 0; border-radius: 1rem; display: flex; align-items: center; justify-content: center; white-space: nowrap; 
-    &.vertical{flex-direction: column; 
-        [class*=ax-icon-]{font-size:5.5rem; margin-bottom: 1rem; }
+.#{$com-toast} { @include cover; z-index: 998;
+    >.#{$com-toast}-container { font-size: 2.8rem; @include pop; color: #fff; background: rgba(0, 0, 0, .5); z-index: -1; padding: 2.5rem 5rem; text-align: center; opacity: 0; border-radius: 1rem; @include flex; white-space: nowrap; 
+        [class*=-icon-] { margin-right: 1rem; }
+        &.vertical { flex-direction: column; 
+            [class*=-icon-] { font-size: 5.5rem; margin-bottom: 1rem; }
+        }
+        &.on { opacity: 1; z-index: 1000; }
     }
-    &.on { opacity: 1; z-index: 1000; }
+    >.mask{ position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 998; 
+        &.light { background-color: hsla(0, 0%, 100%, .3)}
+        &.dark { background-color: rgba(0, 0, 0, .7)}
+        &.transparent { background-color: transparent; }
+    }
 }

@@ -1,7 +1,4 @@
 export default {
-    props: {
-
-    },
     computed: {
         iconPrefix() {
             let me = this;

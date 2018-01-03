@@ -8,6 +8,10 @@ import lang from '../src/locale/lang/zh-cn' //en,zh-cn,zh-tw
 
 import router from './router'
 
+import axconfig from './api/ax-config';
+
+console.log(axconfig)
+
 //前置信息
 if (typeof Object.assign != 'function') {
     _util.file.load('https://static.zhongan.com/website/assets/libs/polyfills/object-assign.js')
@@ -16,10 +20,7 @@ if (typeof Object.assign != 'function') {
 //全局注入
 Vue.config.devtools = true;
 
-Vue.use(ax, {
-    lang,
-    version: '0.0.3'
-});
+Vue.use(ax, axconfig);
 
 Vue.use(VueRouter)
 

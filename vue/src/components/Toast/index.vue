@@ -2,16 +2,19 @@
     <transition :name="cls+'-ani-std'">
         <div :class="[cls]">
             <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'',vertical?'vertical':'',opacity,]">
-                <i v-show="mapIcon" :class="['ax-icon-'+mapIcon,icon==='loading'?'ax-icon-spin':'']"></i>
+                <i v-show="mapIcon" :class="['ax-icon-'+mapIcon,icon==='loading'?iconPrefix='-spin':'']"></i>
                 <div v-html="content"></div>
             </div>
             <div v-show="mask" @click="axMaskClose" :class="['mask',maskOpacity]"></div>
         </div>
+        <tmp-mask :opacity="maskOpacity" :visible="maskVisible" @mask-close='onMaskClose' ></tmp-mask>
     </transition>
 </template>
 
 <script>
-    const prefix = "ax";
+    const prefix = __prefix__;
+    import baseMixin from '../../mixins/base'
+    import tmpMask from '../Mask/index.vue'
 
     const mapIcons = {
         info: 'info',
@@ -23,11 +26,15 @@
 
     export default {
         name: `${prefix}Toast`,
+        mixins: [baseMixin.std],
+        components: {
+            tmpMask
+        },
         data() {
             return {
                 cls: `${prefix}-toast`,
                 content: '',
-                opacity: 'dark',
+                opacity: 'transparent',
                 icon: '',
                 duration: 1600,
                 visible: '',
@@ -86,17 +93,17 @@
             },
             axKeyClose(e) {
                 let me = this;
-                if (e.keyCode === 27 && me.visible && asc) {
+                if (e.keyCode === 27 && me.visible && me.asc) {
                     me.axClose();
                 }
             },
             axDestory() {
                 let me = this;
-                let pNode = me.$el.parentNode;
                 me.mask = false;
                 me.axClearTimer();
                 me.$destroy(true);
                 me.axClearListener();
+                let pNode = me.$el.parentNode;
                 pNode && pNode.removeChild(me.$el);
             },
             axInit() {

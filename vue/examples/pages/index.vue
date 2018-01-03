@@ -3,10 +3,27 @@
         <input class="f26" type="button" @click="onToast" value="点击onToast" />
         <input class="f26" type="button" @click="onConfirm" value="点击onConfirm" />
         <input class="f26" type="button" @click="onMask" value="点击onMask" />
+
+        <h2>
+            直营APP平台化H5接入规范
+        </h2>
+        <div>
+            <button class="f30 p20" @click="testBridge">DEMO：getZAToken</button>
+        </div>
+
     </div>
 </template>
 
 <script>
+    window.evtTest = function (data) {
+        data = JSON.parse(data);
+        if (data.status == '1') {
+            alert(1)
+        } else if (data.status == '0') {
+            alert(0)
+        }
+    }
+
     export default {
         data() {
             return {
@@ -14,18 +31,23 @@
             }
         },
         methods: {
+            testBridge() {
+                let me = this;
+
+                let paramsObj = {
+                    functionName: "getZAToken",
+                    parmas: {
+                        "appKey": "test"
+                    },
+                    complete: "evtTest",
+                }
+
+                window.prompt(JSON.stringify(paramsObj))
+
+            },
             onMask(e) {
                 let me = this;
                 me.$mask.show((mask) => {
-                    me.$toast({
-                        duration: 3000,
-                        msg: '3秒后mask关闭',
-                        onClose(toast) {
-                            mask.hide(() => {
-                                toast.hide()
-                            })
-                        }
-                    });
 
                 });
             },
@@ -40,6 +62,8 @@
                 let me = this;
                 me.$confirm({
                     title: '提示',
+                    icon: 'loading',
+                    loading: true,
                     msg: '请填写您的手机号码',
                     onClose(comp) {
                         me.$toast('你关闭了弹窗')

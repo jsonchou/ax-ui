@@ -24,10 +24,10 @@ console.log(`${spa.toUpperCase()} PROJECT`);
 console.log('---------------------------\n');
 
 //set base loaders
-let myLoaders = [
-    {
+let myLoaders = [{
         test: /\.css$/,
         exclude: /node_modules/,
+        include: path.resolve(__dirname, '..', spa),
         use: ExtractTextPlugin.extract({
             fallback: "style-loader",
             use: ["css-loader", "autoprefixer-loader"]
@@ -36,6 +36,7 @@ let myLoaders = [
     {
         test: /\.scss$/,
         exclude: /node_modules/,
+        include: path.resolve(__dirname, '..', spa),
         use: ExtractTextPlugin.extract({
             fallback: "style-loader",
             use: ["css-loader", "sass-loader"]
@@ -44,6 +45,7 @@ let myLoaders = [
     {
         test: /\.less$/,
         exclude: /node_modules/,
+        include: path.resolve(__dirname, '..', spa),
         use: ExtractTextPlugin.extract({
             fallback: "style-loader",
             use: ["css-loader", "less-loader"]
@@ -61,7 +63,7 @@ let myLoaders = [
                 // outputPath
             }
         }]
-    }
+    },
 ];
 
 if (spa == 'react') {
@@ -70,20 +72,20 @@ if (spa == 'react') {
         include: path.resolve(__dirname, '..', spa),
         exclude: /node_modules/,
         use: ['babel-loader']
-    },];
+    }, ];
     myLoaders = myLoaders.concat(tmp)
     myAlias = {};
 } else if (spa == 'vue') {
     let tmp = [{
-        test: /\.js$/,
-        exclude: /node_modules|vue\/dist|vue-hot-reload-api|vue-loader/,
-        use: ['babel-loader']
-    },
-    {
-        test: /\.vue$/,
-        exclude: /node_modules/,
-        use: ['vue-loader']
-    },
+            test: /\.js$/,
+            exclude: /node_modules|vue\/dist|vue-hot-reload-api|vue-loader/,
+            use: ['babel-loader']
+        },
+        {
+            test: /\.vue$/,
+            exclude: /node_modules/,
+            use: ['vue-loader']
+        },
     ];
     myLoaders = myLoaders.concat(tmp)
 }
@@ -99,7 +101,8 @@ let plugins = [
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+        '__prefix__':`'${require(path.join(__dirname, '..', spa, 'examples/api/ax-config.js')).prefix}'` ,
     }),
     new UglifyJSPlugin({
         exclude: /\.min\.js$/,
@@ -132,7 +135,7 @@ module.exports = {
     devtool: env === 'p' ? false : 'eval',
     entry: {
         'ax': `../${spa}/examples/main.js${spa === 'react' ? 'x' : ''}`,
-        vendors: [`${spa}`, `${spa}-router`]
+        'vendors': [`${spa}`, `${spa}-router`]
     },
     output: {
         path: path.join(__dirname, `../${spa}/src`),

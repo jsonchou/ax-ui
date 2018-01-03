@@ -1,19 +1,35 @@
 <template>
     <transition :name="cls+'-ani-std'">
-        <div :class="[cls,visible?'on':'',opacity]" @click="axClose"></div>
+        <div :class="[cls,visible?'on':'',opacity]" :opacity="opacity" @click="axClose"></div>
     </transition>
 </template>
 
 <script>
-    const prefix = "ax";
+    const prefix = __prefix__;
+    import baseMixin from '../../mixins/base'
+    import validator from '../../utils/validator'
 
     export default {
         name: `${prefix}Mask`,
+        props: {
+            opacity: {
+                type: String,
+                validator: validator(['transparent', 'dark', 'light']),
+                default: 'transparent',
+            },
+            asc: {
+                type: Boolean,
+                default: false,
+            },
+            visible: {
+                type: Boolean,
+                default: false,
+            },
+        },
         data() {
             return {
                 cls: `${prefix}-mask`,
                 visible: '',
-                opacity: 'dark', //dark,light,transparent
                 onShow: null,
                 onHide: null,
                 //-------------------------------------
@@ -27,6 +43,7 @@
             },
             axClose() {
                 let me = this;
+                me.$emit('mask-close', event);
                 me.axDestory();
                 me.onHide && me.onHide(me);
                 //me.$emit('close');
@@ -41,15 +58,15 @@
             },
             axKeyClose(e) {
                 let me = this;
-                if (e.keyCode === 27 && me.visible) {
+                if (e.keyCode === 27 && me.visible && me.asc) {
                     me.axClose();
                 }
             },
             axDestory() {
                 let me = this;
-                let pNode = me.$el.parentNode;
                 me.$destroy(true);
                 me.axClearListener();
+                let pNode = me.$el.parentNode;
                 pNode && pNode.removeChild(me.$el);
             },
             axInit() {

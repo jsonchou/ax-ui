@@ -1,7 +1,9 @@
 
 
 @mixin cover($pos:fixed){position:$pos; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; }
+
 @mixin pop($pos:fixed){position:$pos; left: 50%; top: 50%; transform:translate3d(-50%,-50%,0); }
+
 @mixin flex($direction:row){display: flex; justify-content: center; align-items: center; flex-direction:$direction; }
 
 @mixin ax-icon() { display: inline-block; font: normal normal normal #{$ax-size}/#{$ax-line} FontAwesome; font-size: inherit; text-rendering: auto; -webkit-font-smoothing: antialiased; }

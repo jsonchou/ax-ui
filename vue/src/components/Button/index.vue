@@ -1,15 +1,16 @@
 <template>
-    <button class="el-button" @click="axClick" :disabled="disabled" :autofocus="autofocus" :theme="theme" :class="[
-        theme ? iconPrefix+'-button-' + theme : '',
-        size ? iconPrefix+'-button-' + size : '',
+    <button @click="axClick" :disabled="disabled" :size="size" :autofocus="autofocus" :theme="theme" :class="[
+        prefix+'-button',
+        theme ? prefix+'-button-' + theme : '',
+        size ? prefix+'-button-' + size : '',
         {
           'is-disabled': disabled,
-          'is-loading': loading,
+          'is-loading': icon=='loading',
           'is-plain': plain,
           'is-round': round
         }
       ]">
-        <i :class="[icon,loading?iconPrefix+'-spin':'']" v-if="icon && !loading"></i>
+        <i :class="[iconPrefix+'-'+icon,icon=='loading'?iconPrefix+'-spin':'']" v-if="icon"></i>
         <span v-if="$slots.default">
             <slot></slot>
         </span>
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-    const prefix = "ax";
+    const prefix = __prefix__;
     import baseMixin from '../../mixins/base'
     import validator from '../../utils/validator'
 
@@ -32,12 +33,12 @@
             theme: {
                 type: String,
                 validator: validator(['default', 'primary', 'info', 'success', 'warning', 'error']),
-                default: 'default',
+                default: '',
             },
             size: {
                 type: String,
                 validator: validator(['xl', 'lg', 'sm', 'xs']),
-                default: null,
+                default: '',
             },
             shape: {
                 type: String,
@@ -60,15 +61,16 @@
                 type: Boolean,
                 default: false,
             },
-            loading: {
-                type: Boolean,
-                default: false,
-            },
+        },
+        watch: {
+
         },
         data() {
+            let me = this;
+            console.log('me data', me);
             return {
 
-            };
+            }
         },
         methods: {
             axClick(e) {
@@ -105,7 +107,7 @@
         mounted() {
             let me = this;
             me.axInit();
-            console.log('me', me)
+            console.log('me btn', me)
         },
         beforeDestory() {
             let me = this;

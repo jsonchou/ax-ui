@@ -8,13 +8,13 @@
                     </button>
                     <div class="title" v-html="title"></div>
                     <div class="content">
-                        <i :class="[iconPrefix+'-'+icon]"></i>
+                        <i :class="[iconPrefix+'-'+icon,icon=='loading'?iconPrefix+'-spin':'']"></i>
                         <div class="message" v-html="content"></div>
                     </div>
                 </div>
                 <div :class="[cls+'-control']">
-                    <button class="el-button " @click="axCancle" v-show="showCancelButton">{{cancelButtonText}}</button>
-                    <button class="el-button " @click="axConfirm" v-show="showConfirmButton">{{confirmButtonText}}</button>
+                    <tmp-button ref="refCancel" @click="axCancle" v-show="showCancelButton" :class="[cancelButtonClass]">{{cancelButtonText}}</tmp-button>
+                    <tmp-button theme="warning" ref="refConfirm" icon="loading" @click="axConfirm" v-show="showConfirmButton" :class="[confirmButtonClass]">{{confirmButtonText}}</tmp-button>
                 </div>
             </div>
         </div>
@@ -22,15 +22,15 @@
 </template>
 
 <script>
-    const prefix = "ax";
+    const prefix = __prefix__;
     import baseMixin from '../../mixins/base'
-    import Button from '../Button'
+    import tmpButton from '../Button/index.vue'
 
     export default {
         name: `${prefix}Confirm`,
         mixins: [baseMixin.std],
         components: {
-            [`tmpButton`]: Button
+            tmpButton
         },
         data() {
             return {
@@ -43,8 +43,11 @@
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 showClose: true,
-                showCancelButton: false,
+                showCancelButton: true,
                 showConfirmButton: true,
+
+                cancelButtonClass: '',
+                confirmButtonClass: '',
 
                 showMask: true,
                 closeOnClickMask: true,
@@ -68,6 +71,9 @@
                     }
                 }
             }
+        },
+        computed: {
+
         },
         methods: {
             axClose() {
@@ -115,6 +121,7 @@
         mounted() {
             let me = this;
             me.axInit();
+            console.log('me confirm', me)
         },
         beforeDestory() {
             let me = this;

@@ -1,8 +1,10 @@
-export default {
-    computed: {
-        iconPrefix() {
-            let me = this;
-            return me.$ax.prefix + '-icon'
+const std = {
+    data() {
+        return {
+            prefix: __prefix__,
+            iconPrefix: __prefix__ + '-icon'
         }
-    }
-}
+    },
+};
+
+export default std;

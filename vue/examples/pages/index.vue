@@ -1,16 +1,16 @@
 <template>
     <div class="template-index">
 
-        <input class="f26" type="button" @click="onToast" value="点击onToast" />
-        <input class="f26" type="button" @click="onConfirm" value="点击onConfirm" />
-        <input class="f26" type="button" @click="onMask" value="点击onMask" />
+        <input class="g10 block f26 mb20" type="button" @click="onToast" value="点击onToast" />
+        <input class="g10 block f26 mb20" type="button" @click="onConfirm" value="点击onConfirm" />
+        <input class="g10 block f26 mb20" type="button" @click="onMask" value="点击onMask" />
 
-        <h2>
+        <h2 class="tc mb20">
             直营APP平台化H5接入规范
         </h2>
 
         <div>
-            <button class="f30 p20" @click="testBridge">DEMO：getZAToken</button>
+            <button class="g10 block  f30 p20" @click="testBridge">DEMO：getZAToken</button>
         </div>
 
     </div>
@@ -71,10 +71,10 @@
             onConfirm(e) {
                 let me = this;
                 me.$confirm({
-                    title: '提示',
+                    title: '提示2',
                     icon: 'loading',
-                    loading: true,
-                    msg: '请填写您的手机号码',
+                    confirmButtonIcon: 'warn',
+                    msg: '请填写您的手机号码222',
                     onClose(comp) {
                         me.$toast('你关闭了弹窗')
                     },

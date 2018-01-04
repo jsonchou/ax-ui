@@ -2,7 +2,7 @@
     <transition :name="cls+'-ani-std'">
         <div :class="[cls]">
             <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'',vertical?'vertical':'',opacity,]">
-                <i v-show="mapIcon" :class="['ax-icon-'+mapIcon,icon==='loading'?iconPrefix='-spin':'']"></i>
+                <i v-show="icon" :class="['ax-icon-'+icon,icon==='loading'?iconPrefix='-spin':'']"></i>
                 <div v-html="content"></div>
             </div>
             <tmp-mask :opacity="maskOpacity" :visible="axMaskVisible" ref="mask" @mask:close="axMaskClose"></tmp-mask>
@@ -14,14 +14,6 @@
     const prefix = __prefix__;
     import baseMixin from '../../mixins/base'
     import tmpMask from '../Mask/index.vue'
-
-    const mapIcons = {
-        info: 'info',
-        warn: 'warning',
-        error: 'error',
-        success: 'success',
-        loading: 'loading',
-    }
 
     export default {
         name: `${prefix}Toast`,
@@ -38,7 +30,7 @@
                 duration: 1600,
                 visible: '',
                 maskOpacity: 'transparent',
-                closeOnClickModal: false,
+                closeOnClickMask: false,
                 asc: false,
                 onClose: null,
                 vertical: false, //横向，水平
@@ -48,10 +40,7 @@
             };
         },
         computed: {
-            mapIcon() {
-                let me = this;
-                return mapIcons[me.icon] || ''
-            }
+           
         },
         methods: {
             hide() {
@@ -60,7 +49,7 @@
             },
             axMaskClose() {
                 let me = this;
-                if (me.closeOnClickModal) {
+                if (me.closeOnClickMask) {
                     me.axClose();
                 }
             },

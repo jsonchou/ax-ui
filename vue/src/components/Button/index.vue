@@ -32,13 +32,13 @@
             },
             theme: {
                 type: String,
-                validator: validator(['default', 'primary', 'info', 'success', 'warning', 'error']),
-                default: '',
+                validator: validator(['default', 'primary', 'info', 'success', 'warn', 'error']),
+                default: 'default',
             },
             size: {
                 type: String,
                 validator: validator(['xl', 'lg', 'sm', 'xs']),
-                default: '',
+                default: 'xl',
             },
             shape: {
                 type: String,

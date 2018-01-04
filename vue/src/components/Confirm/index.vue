@@ -13,31 +13,37 @@
                     </div>
                 </div>
                 <div :class="[cls+'-control']">
-                    <tmp-button ref="refCancel" @click="axCancle" v-show="showCancelButton" :class="[cancelButtonClass]">{{cancelButtonText}}</tmp-button>
-                    <tmp-button theme="warning" ref="refConfirm" icon="loading" @click="axConfirm" v-show="showConfirmButton" :class="[confirmButtonClass]">{{confirmButtonText}}</tmp-button>
+                    <tmp-button ref="cancel" :icon="cancelButtonIcon" @click="axCancle" v-show="showCancelButton" :class="[cancelButtonClass]">{{cancelButtonText}}</tmp-button>
+                    <tmp-button theme="primary" :icon="confirmButtonIcon" ref="confirm" @click="axConfirm" v-show="showConfirmButton" :class="[confirmButtonClass]">{{confirmButtonText}}</tmp-button>
                 </div>
             </div>
+
+            <tmp-mask :opacity="maskOpacity" :visible="axMaskVisible" ref="mask" @mask:close="axMaskClose"></tmp-mask>
+
         </div>
     </transition>
 </template>
 
 <script>
     const prefix = __prefix__;
+    import validator from '../../utils/validator'
     import baseMixin from '../../mixins/base'
     import tmpButton from '../Button/index.vue'
+    import tmpMask from '../Mask/index.vue'
 
     export default {
         name: `${prefix}Confirm`,
         mixins: [baseMixin.std],
         components: {
-            tmpButton
+            tmpButton,
+            tmpMask
         },
         data() {
             return {
                 cls: `${prefix}-confirm`,
                 title: '提示',
                 content: '',
-                icon: 'info',
+                icon: '',
                 visible: false,
 
                 confirmButtonText: '确定',
@@ -49,7 +55,11 @@
                 cancelButtonClass: '',
                 confirmButtonClass: '',
 
+                cancelButtonIcon: '',
+                confirmButtonIcon: '',
+
                 showMask: true,
+                maskOpacity: 'dark',
                 closeOnClickMask: true,
 
                 esc: true,
@@ -58,24 +68,22 @@
                 onCancle: null,
                 onConfirm: null,
                 //-------------------------------------
+                axMaskVisible: false,
             };
         },
         watch: {
-            visible(nv, ov) {
-                let me = this;
-                if (me.showMask) {
-                    if (nv) {
-                        me.$mask.show();
-                    } else {
-                        me.$mask.hide();
-                    }
-                }
-            }
+            
         },
         computed: {
 
         },
         methods: {
+            axMaskClose() {
+                let me = this;
+                if (me.closeOnClickMask) {
+                    me.axClose();
+                }
+            },
             axClose() {
                 let me = this;
                 me.axDestory();
@@ -108,6 +116,7 @@
             axDestory() {
                 let me = this;
                 me.visible = false;
+                me.axMaskVisible = false;
                 let pNode = me.$el.parentNode;
                 me.$destroy(true);
                 me.axClearListener();

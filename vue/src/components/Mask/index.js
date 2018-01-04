@@ -35,7 +35,7 @@ Wrapper.show = (opt = {}) => {
             onShow: opt
         };
     }
-    opt.visible = true;
+    opt.axVisible = true;
     return Wrapper(opt);
 }
 
@@ -45,7 +45,7 @@ Wrapper.hide = (opt = {}) => {
             onHide: opt
         };
     }
-    opt.visible = false;
+    opt.axVisible = false;
     return Wrapper(opt);
 }
 

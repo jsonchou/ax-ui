@@ -1,6 +1,6 @@
 <template>
     <transition :name="cls+'-ani-std'">
-        <div :class="[cls,visible?'on':'',opacity]" :opacity="opacity" @click="axClose"></div>
+        <div :class="[cls,visible?'on':'',axVisible?'on':'',opacity]" :asc="asc" :visible="visible" :opacity="opacity" @click="axClick"></div>
     </transition>
 </template>
 
@@ -14,8 +14,8 @@
         props: {
             opacity: {
                 type: String,
-                validator: validator(['transparent', 'dark', 'light']),
-                default: 'transparent',
+                validator: validator(['normal', 'transparent', 'dark', 'light']),
+                default: 'normal',
             },
             asc: {
                 type: Boolean,
@@ -29,32 +29,39 @@
         data() {
             return {
                 cls: `${prefix}-mask`,
-                visible: '',
-                onShow: null,
-                onHide: null,
+                onShow: '',
+                onHide: '',
                 //-------------------------------------
-                axTimer: null, //
+                axVisible: false,
             };
+        },
+        watch: {
+            axVisible(nv, ov) {
+                let me = this;
+                if (!nv) {
+                    me.axClose();
+                }
+            },
         },
         methods: {
             hide() {
+                //after show
                 let me = this;
                 me.axClose();
             },
-            axClose() {
+            axClick(e) {
                 let me = this;
-                me.$emit('mask-close', event);
+                me.$emit('mask:close', e);
+            },
+            axClose(e) {
+                let me = this;
                 me.axDestory();
                 me.onHide && me.onHide(me);
-                //me.$emit('close');
             },
-            axStartListener() {
+            axOpen() {
                 let me = this;
-                document.addEventListener('keydown', me.axKeyClose);
-            },
-            axClearListener() {
-                let me = this;
-                document.removeEventListener('keydown', me.axKeyClose);
+                me.$emit('mask:open', me.$data);
+                me.onShow && me.onShow(me);
             },
             axKeyClose(e) {
                 let me = this;
@@ -65,24 +72,23 @@
             axDestory() {
                 let me = this;
                 me.$destroy(true);
-                me.axClearListener();
                 let pNode = me.$el.parentNode;
                 pNode && pNode.removeChild(me.$el);
             },
             axInit() {
                 let me = this;
-                me.axStartListener();
-                me.onShow && me.onShow(me);
+                if (me.axVisible) {
+                    me.axOpen();
+                }
             },
         },
         mounted() {
             let me = this;
-            console.log('test config', me)
             me.axInit();
         },
         beforeDestory() {
             let me = this;
-            me.axDestory();
+            console.log('mask destory log')
         }
     }
 </script>

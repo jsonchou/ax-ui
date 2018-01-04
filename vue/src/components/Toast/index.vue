@@ -5,9 +5,8 @@
                 <i v-show="mapIcon" :class="['ax-icon-'+mapIcon,icon==='loading'?iconPrefix='-spin':'']"></i>
                 <div v-html="content"></div>
             </div>
-            <div v-show="mask" @click="axMaskClose" :class="['mask',maskOpacity]"></div>
+            <tmp-mask :opacity="maskOpacity" :visible="axMaskVisible" ref="mask" @mask:close="axMaskClose"></tmp-mask>
         </div>
-        <tmp-mask :opacity="maskOpacity" :visible="maskVisible" @mask-close='onMaskClose' ></tmp-mask>
     </transition>
 </template>
 
@@ -38,13 +37,13 @@
                 icon: '',
                 duration: 1600,
                 visible: '',
-                mask: true,
                 maskOpacity: 'transparent',
                 closeOnClickModal: false,
                 asc: false,
                 onClose: null,
                 vertical: false, //横向，水平
                 //-------------------------------------
+                axMaskVisible: false,
                 axTimer: null, //
             };
         },
@@ -68,8 +67,8 @@
             axClose() {
                 let me = this;
                 me.axDestory();
+                me.axMaskVisible = false;
                 me.onClose && me.onClose(me);
-                //me.$emit('close');
             },
             axStartTimer() {
                 let me = this;
@@ -99,7 +98,6 @@
             },
             axDestory() {
                 let me = this;
-                me.mask = false;
                 me.axClearTimer();
                 me.$destroy(true);
                 me.axClearListener();

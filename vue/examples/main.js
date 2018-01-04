@@ -32,7 +32,7 @@ router.afterEach((to, from) => {
     document.title = to.name;
 });
 
-window.gApp = new Vue({
+window.vApp = new Vue({
     router,
     render: h => h(App),
 }).$mount('#app');

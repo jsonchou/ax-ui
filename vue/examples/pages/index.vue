@@ -1,5 +1,6 @@
 <template>
     <div class="template-index">
+
         <input class="f26" type="button" @click="onToast" value="点击onToast" />
         <input class="f26" type="button" @click="onConfirm" value="点击onConfirm" />
         <input class="f26" type="button" @click="onMask" value="点击onMask" />
@@ -7,6 +8,7 @@
         <h2>
             直营APP平台化H5接入规范
         </h2>
+
         <div>
             <button class="f30 p20" @click="testBridge">DEMO：getZAToken</button>
         </div>
@@ -48,14 +50,22 @@
             onMask(e) {
                 let me = this;
                 me.$mask.show((mask) => {
-
+                    me.$toast.info({
+                        msg: 'mask show',
+                        duration: 2000,
+                        onClose() {
+                            mask.hide();
+                        }
+                    })
                 });
             },
             onToast(e) {
                 let me = this;
                 me.$toast.info({
+                    asc: true,
+                    closeOnClickModal: true,
                     msg: '请填写您的手机号码',
-                    duration: 2000,
+                    duration: 2000000,
                 })
             },
             onConfirm(e) {

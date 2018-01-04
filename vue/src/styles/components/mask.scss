@@ -1,4 +1,4 @@
-.#{$com-mask} { @include cover; z-index: -1; 
+.#{$com-mask} { @include cover; z-index: -1; background-color: rgba(0, 0, 0, .5); 
     &.light { background-color: hsla(0, 0%, 100%, .3)}
     &.dark { background-color: rgba(0, 0, 0, .7)}
     &.transparent { background-color: transparent; }

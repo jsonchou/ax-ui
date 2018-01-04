@@ -61,11 +61,13 @@
             },
             onToast(e) {
                 let me = this;
-                me.$toast.info({
+                me.$toast.loading({
                     asc: true,
                     closeOnClickModal: true,
-                    msg: '请填写您的手机号码',
+                    maskOpacity: 'dark',
+                    msg: '载入中...',
                     duration: 2000000,
+                    vertical: true,
                 })
             },
             onConfirm(e) {

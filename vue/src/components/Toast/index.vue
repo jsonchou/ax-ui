@@ -2,7 +2,7 @@
     <transition :name="cls+'-ani-std'">
         <div :class="[cls]">
             <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'',vertical?'vertical':'',opacity,]">
-                <i v-show="icon" :class="['ax-icon-'+icon,icon==='loading'?iconPrefix='-spin':'']"></i>
+                <i v-show="icon" :class="['ax-icon-'+icon,icon==='loading'?iconPrefix+'-spin':'']"></i>
                 <div v-html="content"></div>
             </div>
             <tmp-mask :opacity="maskOpacity" :visible="axMaskVisible" ref="mask" @mask:close="axMaskClose"></tmp-mask>
@@ -40,7 +40,7 @@
             };
         },
         computed: {
-           
+
         },
         methods: {
             hide() {

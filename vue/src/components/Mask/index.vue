@@ -89,6 +89,9 @@
         beforeDestory() {
             let me = this;
             console.log('mask destory log')
+        },
+        destroyed() {
+            console.log("mask destroyed") //prints destroyed
         }
     }
 </script>

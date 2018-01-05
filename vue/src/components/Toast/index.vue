@@ -3,9 +3,9 @@
         <div :class="[cls]">
             <div :class="[cls+'-container',cls+'-'+icon,visible?'on':'',vertical?'vertical':'',opacity,]">
                 <i v-show="icon" :class="['ax-icon-'+icon,icon==='loading'?iconPrefix+'-spin':'']"></i>
-                <div v-html="content"></div>
+                <div class="slot" v-html="content"></div>
             </div>
-            <tmp-mask :opacity="maskOpacity" :visible="axMaskVisible" ref="mask" @mask:close="axMaskClose"></tmp-mask>
+            <tmp-mask :opacity="maskOpacity" ref="mask"></tmp-mask>
         </div>
     </transition>
 </template>
@@ -28,14 +28,12 @@
                 opacity: 'transparent',
                 icon: '',
                 duration: 1600,
-                visible: '',
+                visible: false,
                 maskOpacity: 'transparent',
-                closeOnClickMask: false,
                 asc: false,
                 onClose: null,
                 vertical: false, //横向，水平
                 //-------------------------------------
-                axMaskVisible: false,
                 axTimer: null, //
             };
         },
@@ -47,16 +45,9 @@
                 let me = this;
                 me.axClose();
             },
-            axMaskClose() {
-                let me = this;
-                if (me.closeOnClickMask) {
-                    me.axClose();
-                }
-            },
             axClose() {
                 let me = this;
                 me.axDestory();
-                me.axMaskVisible = false;
                 me.onClose && me.onClose(me);
             },
             axStartTimer() {
@@ -105,7 +96,11 @@
         },
         beforeDestory() {
             let me = this;
+            console.log('toast beforeDestory')
             me.axDestory();
+        },
+        destroyed() {
+            console.log("toast destroyed") //prints destroyed
         }
     }
 </script>

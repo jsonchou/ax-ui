@@ -1,31 +1,25 @@
 <template>
-    <div class="template-index">
-
+    <div class="template-index p20">
         <input class="g10 block f26 mb20" type="button" @click="onToast" value="点击onToast" />
         <input class="g10 block f26 mb20" type="button" @click="onConfirm" value="点击onConfirm" />
         <input class="g10 block f26 mb20" type="button" @click="onMask" value="点击onMask" />
-
-        <h2 class="tc mb20">
-            直营APP平台化H5接入规范
-        </h2>
-
-        <div>
-            <button class="g10 block  f30 p20" @click="testBridge">DEMO：getZAToken</button>
-        </div>
-
     </div>
 </template>
 
-<script>
-    window.evtTest = function (data) {
-        data = JSON.parse(data);
-        if (data.status == '1') {
-            alert(1)
-        } else if (data.status == '0') {
-            alert(0)
-        }
+<style>
+    input {
+        background: #12c287;
+        color: #fff;
+        font-size: 3rem;
+        display: block;
+        width: 100%;
+        line-height: 2;
+        border-radius: 1rem;
+        margin-bottom: 1.5rem;
     }
+</style>
 
+<script>
     export default {
         data() {
             return {
@@ -33,37 +27,36 @@
             }
         },
         methods: {
-            testBridge() {
-                let me = this;
-
-                let paramsObj = {
-                    functionName: "getZAToken",
-                    parmas: {
-                        "appKey": "test"
-                    },
-                    complete: "evtTest",
-                }
-
-                window.prompt(JSON.stringify(paramsObj))
-
-            },
             onMask(e) {
                 let me = this;
+
+                console.log('page me', me)
+
                 me.$mask.show((mask) => {
                     me.$toast.info({
                         msg: 'mask show',
                         duration: 2000,
                         onClose() {
                             mask.hide();
-                        }
+                        },
                     })
                 });
+
+
+                setTimeout(() => {
+                    me.$mask.hide((mask) => {
+                        me.$toast.info({
+                            msg: 'mask hide',
+                            duration: 2000,
+                        })
+                    });
+                }, 5000)
+
             },
             onToast(e) {
                 let me = this;
                 me.$toast.loading({
                     asc: true,
-                    closeOnClickModal: true,
                     maskOpacity: 'dark',
                     msg: '载入中...',
                     duration: 2000000,

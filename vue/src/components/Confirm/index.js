@@ -3,11 +3,7 @@ import Comp from './index.vue'
 
 let EX = Vue.extend(Comp); //默认实例
 
-let _ex;
-
 const Wrapper = function (opt = {}) {
-
-    _ex = null;
 
     if (Vue.prototype.$isServer) {
         // ssr
@@ -19,7 +15,7 @@ const Wrapper = function (opt = {}) {
     //缺省配置
     params.content = typeof opt === 'string' ? opt : (opt.content || opt.msg || opt.message);
 
-    _ex = new EX({
+    let _ex = new EX({
         data: params
     });
 

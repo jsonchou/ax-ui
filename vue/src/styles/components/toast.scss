@@ -1,8 +1,9 @@
 .#{$com-toast} { @include cover; z-index: 998;
-    >.#{$com-toast}-container { font-size: 2.8rem; @include pop; color: #fff; background: rgba(0, 0, 0, .5); z-index: -1; padding: 2.5rem 5rem; text-align: center; opacity: 0; border-radius: 1rem; @include flex; white-space: nowrap; 
-        [class*=-icon-] { margin-right: 1rem; }
+    >.#{$com-toast}-container { font-size: 2.8rem; @include pop; color: #fff; background: rgba(0, 0, 0, .5); z-index: -1; padding: 2.5rem 4rem; text-align: center; opacity: 0; border-radius: 1rem; @include flex; white-space: nowrap; 
+        > .slot { margin-left: 1rem; }
         &.vertical { flex-direction: column; 
-            [class*=-icon-] { font-size: 5.5rem; margin-bottom: 1rem; }
+            >[class*=-icon-] { font-size: 5.5rem; margin-bottom: 1rem; }
+            >.slot { margin-left: 0 }
         }
         &.on { opacity: 1; z-index: 1000; }
     }

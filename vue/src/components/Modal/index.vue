@@ -32,7 +32,7 @@
     import tmpMask from '../Mask/index.vue'
 
     export default {
-        name: `${prefix}Confirm`,
+        name: `${prefix}Modal`,
         mixins: [baseMixin.std],
         components: {
             tmpButton,
@@ -40,7 +40,7 @@
         },
         data() {
             return {
-                cls: `${prefix}-confirm`,
+                cls: `${prefix}-modal`,
                 title: '提示',
                 content: '',
                 icon: '',
@@ -117,10 +117,9 @@
                 let me = this;
                 me.visible = false;
                 me.axMaskVisible = false;
-                let pNode = me.$el.parentNode;
                 me.$destroy(true);
                 me.axClearListener();
-                pNode && pNode.removeChild(me.$el);
+                me.$el.remove();
             },
             axInit() {
                 let me = this;
@@ -130,7 +129,7 @@
         mounted() {
             let me = this;
             me.axInit();
-            console.log('me confirm', me)
+            console.log('me modal', me)
         },
         beforeDestory() {
             let me = this;

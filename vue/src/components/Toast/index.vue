@@ -31,7 +31,8 @@
                 visible: false,
                 maskOpacity: 'transparent',
                 asc: false,
-                onClose: null,
+                onHide: null,
+                onShow: null,
                 vertical: false, //横向，水平
                 //-------------------------------------
                 axTimer: null, //
@@ -39,6 +40,16 @@
         },
         computed: {
 
+        },
+        watch: {
+            visible(nv, ov) {
+                let me = this;
+                if (nv) {
+                    me.axOpen();
+                } else {
+                    me.axClose();
+                }
+            }
         },
         methods: {
             hide() {
@@ -48,7 +59,13 @@
             axClose() {
                 let me = this;
                 me.axDestory();
-                me.onClose && me.onClose(me);
+                me.$emit('toast:close', 'emit:toast:close');
+                me.onHide && me.onHide(me);
+            },
+            axOpen() {
+                let me = this;
+                me.$emit('toast:open', 'emit:toast:open');
+                me.onShow && me.onShow(me);
             },
             axStartTimer() {
                 let me = this;
@@ -79,7 +96,7 @@
             axDestory() {
                 let me = this;
                 me.axClearTimer();
-                me.$destroy(true);
+                me.$destroy();
                 me.axClearListener();
                 let pNode = me.$el.parentNode;
                 pNode && pNode.removeChild(me.$el);
@@ -97,9 +114,9 @@
         beforeDestory() {
             let me = this;
             console.log('toast beforeDestory')
-            me.axDestory();
         },
         destroyed() {
+            let me = this;
             console.log("toast destroyed") //prints destroyed
         }
     }

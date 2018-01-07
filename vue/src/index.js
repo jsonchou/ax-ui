@@ -7,6 +7,7 @@ import Button from './components/Button';
 import Mask from './components/Mask';
 import Toast from './components/Toast';
 import Confirm from './components/Confirm';
+import Notify from './components/Notify';
 
 import Calendar from './components/Calendar';
 import Picker from './components/Picker';
@@ -17,6 +18,7 @@ const components = {
     Mask,
     Toast,
     Confirm,
+    Notify,
 
     Calendar,
     Picker,
@@ -48,6 +50,7 @@ const install = function (Vue, opts = {}) {
     Vue.prototype.$toast = Toast;
     Vue.prototype.$confirm = Confirm;
     Vue.prototype.$mask = Mask;
+    Vue.prototype.$notify = Notify;
 
     Vue.prototype.$modal = null;
 }

@@ -93,10 +93,9 @@
             },
             axDestory() {
                 let me = this;
-                let pNode = me.$el.parentNode;
                 me.$destroy(true);
                 me.axClearListener();
-                pNode && pNode.removeChild(me.$el);
+                me.$el.remove();
             },
             axInit() {
                 let me = this;

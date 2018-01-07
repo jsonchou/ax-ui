@@ -1,8 +1,9 @@
 <template>
     <div class="template-index p20">
         <input class="g10 block f26 mb20" type="button" @click="onToast" value="点击onToast" />
-        <input class="g10 block f26 mb20" type="button" @click="onConfirm" value="点击onConfirm" />
+        <input class="g10 block f26 mb20" type="button" @click="onModal" value="点击onModal" />
         <input class="g10 block f26 mb20" type="button" @click="onMask" value="点击onMask" />
+        <input class="g10 block f26 mb20" type="button" @click="onNotify" value="点击onNotify" />
     </div>
 </template>
 
@@ -32,24 +33,21 @@
 
                 console.log('page me', me)
 
-                me.$mask.show((mask) => {
+                let mask = me.$mask.show((mask) => {
                     me.$toast.info({
                         msg: 'mask show',
                         duration: 2000,
-                        onClose() {
-                            mask.hide();
+                        onHide() {
+                            console.log('toast close')
                         },
+                        onShow() {
+                            console.log('toast show')
+                        }
                     })
                 });
 
-
                 setTimeout(() => {
-                    me.$mask.hide((mask) => {
-                        me.$toast.info({
-                            msg: 'mask hide',
-                            duration: 2000,
-                        })
-                    });
+                    mask.hide();
                 }, 5000)
 
             },
@@ -63,9 +61,9 @@
                     vertical: true,
                 })
             },
-            onConfirm(e) {
+            onModal(e) {
                 let me = this;
-                me.$confirm({
+                me.$modal({
                     title: '提示2',
                     icon: 'loading',
                     confirmButtonIcon: 'warn',

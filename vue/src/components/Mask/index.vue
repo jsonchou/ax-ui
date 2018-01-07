@@ -71,7 +71,7 @@
             },
             axDestory() {
                 let me = this;
-                me.$destroy(true);
+                me.$destroy();
                 let pNode = me.$el.parentNode;
                 pNode && pNode.removeChild(me.$el);
             },

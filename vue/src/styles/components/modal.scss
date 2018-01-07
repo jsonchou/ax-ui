@@ -1,8 +1,8 @@
-.#{$com-confirm}-container { font-size: 2.8rem; z-index: -1; opacity: 0; @include cover; 
+.#{$com-modal}-container { font-size: 2.8rem; z-index: -1; opacity: 0; @include cover; 
     &.on { opacity: 1; z-index: 1000; }
-    >.#{$com-confirm}-inner {
+    >.#{$com-modal}-inner {
         @include pop; max-width: 65rem; min-width: 42rem; border-radius: 1rem; z-index: 1001; background-color: #ffffff; 
-        .#{$com-confirm}-box {
+        .#{$com-modal}-box {
             >.title { padding: 2.5rem 2.5rem; font-size: 2.8rem}
             >.content { @include flex; padding: 0 2.5rem; 
                 [class*=-icon-] { margin-right: 1rem; }
@@ -11,7 +11,7 @@
                 .ax-icon-close { font-size: 4rem; }
             }
         }
-        .#{$com-confirm}-control { text-align: right; padding: 2.5rem 2.5rem 2.5rem; 
+        .#{$com-modal}-control { text-align: right; padding: 2.5rem 2.5rem 2.5rem; 
             button { font-size: 2.6rem; font-size: 2.6rem; }
         }
     }

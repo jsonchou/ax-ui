@@ -35,16 +35,6 @@ Wrapper.show = (opt = {}) => {
     return Wrapper(opt);
 }
 
-Wrapper.hide = (opt = {}) => {
-    if (typeof opt === 'function') {
-        opt = {
-            onHide: opt
-        };
-    }
-    opt.axVisible = false;
-    return Wrapper(opt);
-}
-
 export default Wrapper;
 
 //mask show & hide must be the same vue node

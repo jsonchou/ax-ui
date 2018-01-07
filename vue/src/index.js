@@ -4,9 +4,10 @@ import locale from './locale/index';
 
 // BASE UI
 import Button from './components/Button';
+
 import Mask from './components/Mask';
 import Toast from './components/Toast';
-import Confirm from './components/Confirm';
+import Modal from './components/Modal';
 import Notify from './components/Notify';
 
 import Calendar from './components/Calendar';
@@ -15,9 +16,10 @@ import Scroll from './components/Scroll';
 
 const components = {
     Button,
+
     Mask,
     Toast,
-    Confirm,
+    Modal,
     Notify,
 
     Calendar,
@@ -48,11 +50,9 @@ const install = function (Vue, opts = {}) {
 
     //inject base components
     Vue.prototype.$toast = Toast;
-    Vue.prototype.$confirm = Confirm;
+    Vue.prototype.$modal = Modal;
     Vue.prototype.$mask = Mask;
     Vue.prototype.$notify = Notify;
-
-    Vue.prototype.$modal = null;
 }
 
 // auto install & browser import mode

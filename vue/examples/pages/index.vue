@@ -78,6 +78,24 @@
                         me.$toast('你的操作成功')
                     },
                 })
+            },
+            onNotify(e) {
+                let me = this;
+                me.$notify({
+                    title: '提示2',
+                    icon: 'loading',
+                    confirmButtonIcon: 'warn',
+                    msg: '请填写您的手机号码222',
+                    onClose(comp) {
+                        me.$toast('你关闭了弹窗')
+                    },
+                    onCancle(comp) {
+                        me.$toast('你取消了操作')
+                    },
+                    onConfirm(comp) {
+                        me.$toast('你的操作成功')
+                    },
+                })
             }
         },
         mounted() {

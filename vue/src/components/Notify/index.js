@@ -23,7 +23,15 @@ const Wrapper = function (opt = {}) {
 
     _ex.$mount();
 
-    document.body.appendChild(_ex.$el);
+    let parent = document.querySelector(`.${params.cls}-skeleton.${params.placement}`);
+    console.log('parent', parent, `.${params.cls}-skeleton.${params.placement}`)
+    if (!parent) {
+        parent = document.createElement('div');
+        parent.classList.add(`${params.cls}-skeleton`, `${params.placement}`);
+        document.body.appendChild(parent);
+    }
+
+    parent.appendChild(_ex.$el);
 
     _ex.visible = true;
 

@@ -82,7 +82,7 @@
     &.is-plain.is-disabled:hover { color: #f0c78a; background-color: #fdf6ec; border-color: #faecd8}
 }
 
-.#{$com-button}-danger { color: #fff; background-color: #f56c6c; border-color: #f56c6c; 
+.#{$com-button}-error { color: #fff; background-color: #f56c6c; border-color: #f56c6c; 
     &:focus,
     &:hover { background: #f78989; border-color: #f78989; color: #fff}
     &.is-active,

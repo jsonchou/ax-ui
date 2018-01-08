@@ -1,9 +1,9 @@
 <template>
     <div class="template-index p20">
-        <input class="g10 block f26 mb20" type="button" @click="onToast" value="点击onToast" />
-        <input class="g10 block f26 mb20" type="button" @click="onModal" value="点击onModal" />
-        <input class="g10 block f26 mb20" type="button" @click="onMask" value="点击onMask" />
-        <input class="g10 block f26 mb20" type="button" @click="onNotify" value="点击onNotify" />
+        <input class="g10 block f26 mb20" type="button" @click="onToast" value="Toast" />
+        <input class="g10 block f26 mb20" type="button" @click="onModal" value="Modal" />
+        <input class="g10 block f26 mb20" type="button" @click="onMask" value="Mask" />
+        <input class="g10 block f26 mb20" type="button" @click="onNotify" value="Notify" />
     </div>
 </template>
 
@@ -67,6 +67,7 @@
                     title: '提示2',
                     icon: 'loading',
                     confirmButtonIcon: 'warn',
+                    closable: false,
                     msg: '请填写您的手机号码222',
                     onClose(comp) {
                         me.$toast('你关闭了弹窗')
@@ -81,21 +82,24 @@
             },
             onNotify(e) {
                 let me = this;
-                me.$notify({
-                    title: '提示2',
-                    icon: 'loading',
-                    confirmButtonIcon: 'warn',
+                let notify = me.$notify({
+                    title: '',
+                    duration: 4500,
+                    icon: 'error',
+                    placement: 'right-top',
+                    closable: true,
                     msg: '请填写您的手机号码222',
-                    onClose(comp) {
-                        me.$toast('你关闭了弹窗')
+                    onHide(comp) {
+                        me.$toast('你关闭了通知')
                     },
-                    onCancle(comp) {
-                        me.$toast('你取消了操作')
+                    onShow(comp) {
+                        //me.$toast('你打开了通知')
                     },
-                    onConfirm(comp) {
-                        me.$toast('你的操作成功')
-                    },
-                })
+                });
+
+                // setTimeout(() => {
+                //     notify.hide();
+                // }, 2000)
             }
         },
         mounted() {

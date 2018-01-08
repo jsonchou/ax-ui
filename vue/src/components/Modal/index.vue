@@ -3,10 +3,10 @@
         <div :class="[cls+'-container',visible?'on':'']">
             <div :class="[cls+'-inner']">
                 <div :class="[cls+'-box',cls+'-'+icon]">
-                    <button type="button" class="close" @click="axClose" v-show="showClose">
+                    <button type="button" class="close" @click="axClose" v-show="closable">
                         <i :class="[iconPrefix+ '-close']"></i>
                     </button>
-                    <div class="title" v-html="title"></div>
+                    <div class="title" v-html="title" v-show="title"></div>
                     <div class="content">
                         <i :class="[iconPrefix+'-'+icon,icon=='loading'?iconPrefix+'-spin':'']"></i>
                         <div class="message" v-html="content"></div>
@@ -46,9 +46,11 @@
                 icon: '',
                 visible: false,
 
+                closable: false,
+
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
-                showClose: true,
+                
                 showCancelButton: true,
                 showConfirmButton: true,
 
@@ -58,7 +60,6 @@
                 cancelButtonIcon: '',
                 confirmButtonIcon: '',
 
-                showMask: true,
                 maskOpacity: 'dark',
                 closeOnClickMask: true,
 
@@ -72,7 +73,7 @@
             };
         },
         watch: {
-            
+
         },
         computed: {
 

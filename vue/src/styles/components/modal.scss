@@ -8,7 +8,7 @@
                 [class*=-icon-] { margin-right: 1rem; }
             }
             >.close { position: absolute; top: 1.5rem; right: 1.5rem; padding: 0; border: none; outline: none; background: transparent; font-size: 2.4rem; cursor: pointer; color: #ccc; 
-                .ax-icon-close { font-size: 4rem; }
+                [class*=-icon-] { font-size: 4rem; }
             }
         }
         .#{$com-modal}-control { text-align: right; padding: 2.5rem 2.5rem 2.5rem; 

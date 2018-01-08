@@ -98,8 +98,7 @@
                 me.axClearTimer();
                 me.$destroy();
                 me.axClearListener();
-                let pNode = me.$el.parentNode;
-                pNode && pNode.removeChild(me.$el);
+                me.$el.remove();
             },
             axInit() {
                 let me = this;

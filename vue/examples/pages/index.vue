@@ -67,7 +67,7 @@
                     title: '提示2',
                     icon: 'loading',
                     confirmButtonIcon: 'warn',
-                    closable: false,
+                    closable: true,
                     msg: '请填写您的手机号码222',
                     onClose(comp) {
                         me.$toast('你关闭了弹窗')
@@ -84,10 +84,10 @@
                 let me = this;
                 let notify = me.$notify({
                     title: '',
-                    duration: 4500,
-                    icon: 'error',
+                    duration: 4500000,
+                    icon: 'success',
                     placement: 'right-top',
-                    closable: true,
+                    closable: false,
                     msg: '请填写您的手机号码222',
                     onHide(comp) {
                         me.$toast('你关闭了通知')

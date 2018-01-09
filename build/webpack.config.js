@@ -138,7 +138,7 @@ module.exports = {
         'vendors': [`${spa}`, `${spa}-router`]
     },
     output: {
-        path: path.join(__dirname, `../${spa}/src`),
+        path: path.join(__dirname, `../${spa}`),
         filename: `dist/[name].js`,
         chunkFilename: 'dist/[name].[id].chunk.js',
         publicPath: `${spa}`,

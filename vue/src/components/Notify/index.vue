@@ -2,13 +2,13 @@
     <transition :name="cls+'-ani-std'">
         <div :class="[cls+'-container',visible?'on':'']">
             <div :class="[cls+'-inner']">
-                <div :class="[cls+'-box',icon? cls+'-'+icon:'']">
+                <div :class="[cls+'-box',icon? cls+'-'+icon:cls+'-primary']">
                     <button type="button" class="close" @click="axClose" v-show="closable">
                         <i :class="[iconPrefix+ '-close']"></i>
                     </button>
                     <div class="title" v-html="title" v-show="title"></div>
                     <div class="content">
-                        <i :class="[iconPrefix+'-'+icon,icon=='loading'?iconPrefix+'-spin':'']"></i>
+                        <i v-show="icon" :class="[iconPrefix+'-'+icon,icon=='loading'?iconPrefix+'-spin':'']"></i>
                         <div class="message" v-html="content"></div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
         data() {
             return {
                 cls: `${prefix}-notify`,
-                title: '提示',
+                title: '',
                 content: '',
                 icon: '',
                 visible: false,

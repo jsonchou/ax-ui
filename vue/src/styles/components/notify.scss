@@ -9,14 +9,18 @@
 
     .#{$com-notify}-container { font-size: 2.8rem; z-index: -1; opacity: 0; margin-bottom: 5rem; 
         &.on { opacity: 1; z-index: 1000; }
-        >.#{$com-notify}-inner { border-radius: 1rem; background-color: #ffffff; overflow: hidden; 
-            >.#{$com-notify}-box { position: relative; color: #fff; background-color: #909399; 
+        >.#{$com-notify}-inner { background-color: #fff; border-radius: 1rem; 
+            >.#{$com-notify}-box { position: relative; color: #fff; border:0.1rem solid #ccc; box-shadow:0.5rem 0.5rem 0.5rem rgba(0,0,0,.1); border-radius: 1rem; padding-right: 3rem; 
                 [class*=-icon-] { color: #fff; }
+
+                &.#{$com-notify}-primary,&.#{$com-notify}-loading { background-color: #fff; color: #606266; 
+                    [class*=-icon-] { color: #606266; }
+                }
                 &.#{$com-notify}-success { background-color: #67c23a; }
                 &.#{$com-notify}-error { background-color: #f56c6c; }
                 &.#{$com-notify}-info { background-color: #909399; }
                 &.#{$com-notify}-warn { background-color: #e6a23c; }
-                &.#{$com-notify}-loading { background-color: #909399; }
+
                 >.title { padding: 2.5rem 2.5rem 0; font-size: 2.8rem}
                 >.content {
                     @include flex; padding: 2.5rem; white-space: nowrap; 

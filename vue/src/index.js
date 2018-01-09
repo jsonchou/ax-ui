@@ -45,6 +45,7 @@ const install = function (Vue, opts = {}) {
 
     //bind component
     Object.values(components).forEach(comp => {
+        console.log(comp.name)
         Vue.component(comp.name, comp); //standard mode
     })
 

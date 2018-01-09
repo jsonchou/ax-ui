@@ -1,6 +1,37 @@
 ﻿;
 
 function BlackWorld() {
+
+	var v = navigator.userAgent.toLowerCase().indexOf("android") != -1 || navigator.userAgent.toLowerCase().indexOf("iphone") != -1 || navigator.userAgent.toLowerCase().indexOf("ipad") != -1,
+		caW = v ? window.innerWidth : 400,
+		caH = v ? window.innerHeight : 600,
+		lastFpsUpdateTime = (+new Date),
+		caObj, ctxtObj, allRow = [],
+		rowC = 3.4,
+		colC = 4,
+		cellW = caW / colC,
+		cellH = caH / rowC,
+		rC = 4,
+		cC = 4,
+		isStart = false,
+		canGoOn = false,
+		canTouch = false,
+		curOffset = -cellH,
+		downSpeed = cellH / 2 + 0.5,
+		errorTime = 0,
+		bigError = 1,
+		goodJump = 0,
+		startTime,
+		caObjWOffset = 0,
+		caObjHOffset = 0,
+		winCount = 120,
+		lostCount = 40,
+		normalCount = 60,
+		timeDeadLine = 30,
+		haveRest = false,
+		btn_start;
+
+
 	function doResize() {
 		caW = v ? window.innerWidth : 400;
 		caH = v ? window.innerHeight : 600;
@@ -188,7 +219,7 @@ function BlackWorld() {
 				btn_start.innerHTML += "<br />点击底部黑块重新开始<br /><div style='color:white;background-color:" + (goodJump >= winCount ? "red" : (goodJump >= normalCount ? "green" : (goodJump <= lostCount ? "gray" : "green"))) + ";font-size:40px;'>" + (goodJump >= winCount ? "高手" : (goodJump >= normalCount ? "还行" : (goodJump <= lostCount ? "太糟了" : "还行"))) + "，30秒内跨越 " + goodJump + " 块" + "</div>";
 				allRow = [];
 				errorTime = 0;
-				BlackWorld.init();
+				new BlackWorld().init();
 				haveRest = true;
 				setTimeout(function () {
 					haveRest = false;
@@ -232,34 +263,6 @@ function BlackWorld() {
 		e.stopPropagation();
 	}
 
-	var v = navigator.userAgent.toLowerCase().indexOf("android") != -1 || navigator.userAgent.toLowerCase().indexOf("iphone") != -1 || navigator.userAgent.toLowerCase().indexOf("ipad") != -1,
-		caW = v ? window.innerWidth : 400,
-		caH = v ? window.innerHeight : 600,
-		lastFpsUpdateTime = (+new Date),
-		caObj, ctxtObj, allRow = [],
-		rowC = 3.4,
-		colC = 4,
-		cellW = caW / colC,
-		cellH = caH / rowC,
-		rC = 4,
-		cC = 4,
-		isStart = false,
-		canGoOn = false,
-		canTouch = false,
-		curOffset = -cellH,
-		downSpeed = cellH / 2 + 0.5,
-		errorTime = 0,
-		bigError = 1,
-		goodJump = 0,
-		startTime,
-		caObjWOffset = 0,
-		caObjHOffset = 0,
-		winCount = 120,
-		lostCount = 40,
-		normalCount = 60,
-		timeDeadLine = 30,
-		haveRest = false,
-		btn_start;
 
 	this.init = function () {
 			isStart = false;

@@ -1,10 +1,12 @@
 
+
+// base ui
 $com-button:'#{$ax}-button'; 
 
 $com-mask:'#{$ax}-mask'; 
 $com-toast:'#{$ax}-toast'; 
 $com-modal:'#{$ax}-modal'; 
-$com-notify:'#{$ax}-notify';
+$com-notify:'#{$ax}-notify'; 
 
 $com-picker:'#{$ax}-picker'; 
 $com-calendar:'#{$ax}-calendar'; 
@@ -18,4 +20,6 @@ $com-scroll:'#{$ax}-scroll';
 @import './modal.scss';
 @import './notify.scss';
 
-
+@import './picker.scss';
+@import './calendar.scss';
+@import './scroll.scss';

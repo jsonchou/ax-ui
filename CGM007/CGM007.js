@@ -1,9 +1,30 @@
 ﻿;
 
-function BlackWorld() {
+// cell object
+function Cell(row, col, color, needClick) {
+	this.position = {
+		r: row,
+		c: col
+	}
+	this.color = color;
+	this.isOver = false;
+	this.isNeedClick = needClick;
+}
 
-	var v = navigator.userAgent.toLowerCase().indexOf("android") != -1 || navigator.userAgent.toLowerCase().indexOf("iphone") != -1 || navigator.userAgent.toLowerCase().indexOf("ipad") != -1,
-		caW = v ? window.innerWidth : 400,
+Cell.prototype.doCheckClick = function (x, y) {
+	var result = false;
+	if (true) {
+		// in this cell
+		// if right return true;
+		// else return false;
+	}
+	return result;
+};
+
+function BlackWorld() {
+	var v = navigator.userAgent.toLowerCase().indexOf("android") != -1 || navigator.userAgent.toLowerCase().indexOf("iphone") != -1 || navigator.userAgent.toLowerCase().indexOf("ipad") != -1;
+
+	var caW = v ? window.innerWidth : 400,
 		caH = v ? window.innerHeight : 600,
 		lastFpsUpdateTime = (+new Date),
 		caObj, ctxtObj, allRow = [],
@@ -24,13 +45,13 @@ function BlackWorld() {
 		startTime,
 		caObjWOffset = 0,
 		caObjHOffset = 0,
-		winCount = 120,
-		lostCount = 40,
-		normalCount = 60,
-		timeDeadLine = 30,
-		haveRest = false,
-		btn_start;
+		winCount = 120, //学霸 线
+		lostCount = 40, //loser 线
+		normalCount = 60, //normal 线
+		timeDeadLine = 30, //限时
+		haveRest = false;
 
+	var btn_start;
 
 	function doResize() {
 		caW = v ? window.innerWidth : 400;
@@ -186,7 +207,7 @@ function BlackWorld() {
 				ctxtObj.beginPath();
 				ctxtObj.fillStyle = allRow[i][j].color;
 				if (!isStart && i == 0) {
-					ctxtObj.fillStyle = "yellow";
+					ctxtObj.fillStyle = "#ffffff";
 				}
 				ctxtObj.fillRect(j * cellW, (rC - i) * cellH + curOff + 0.5, cellW, cellH);
 				//ctxtObj.strokeStyle = "#0000ff";
@@ -209,6 +230,7 @@ function BlackWorld() {
 	}
 
 	function animate(time) {
+		let me = this;
 		if (isStart) {
 			var hasTime = (timeDeadLine - Math.round(((new Date).getTime() - startTime) / 1E3 * 100) / 100);
 			hasTime = Math.round(hasTime * 100) / 100
@@ -263,71 +285,55 @@ function BlackWorld() {
 		e.stopPropagation();
 	}
 
+	function canEvent(e) {
+		alert();
+	}
 
 	this.init = function () {
-			isStart = false;
-			canTouch = false;
-			goodJump = 0;
-			//document.getElementById("worldOut").innerHTML = '<canvas id="world" width="900" height="550" style="position: absolute; left: 0px; top: 0px;"></canvas>';
-			btn_start = document.getElementById("btn_start");
-			caObj = document.getElementById("world");
-			// if support canvase
-			//if (caObj && caObj.getContext) {
-			ctxtObj = caObj.getContext("2d");
-			// event
-			caObj.addEventListener("click", ca_click2, false);
-			//caObj.addEventListener("touchstart", ca_click, false);
-			caObj.addEventListener("touchstart", ca_click, false);
-			caObj.addEventListener("touchend", stopEvent, false);
-			caObj.addEventListener("touchmove", stopEvent, false);
-			caObj.addEventListener("touchcancel", stopEvent, false);
-			caObj.addEventListener("gesturestart", stopEvent, false);
-			caObj.addEventListener("gesturechange", stopEvent, false);
-			caObj.addEventListener("gestureend", stopEvent, false);
-			//window.addEventListener("resize", function(e){}, false);
-			caObj.addEventListener("mousedown", stopEvent, false);
-			caObj.addEventListener("mouseup", stopEvent, false);
-			caObj.addEventListener("mousemove", stopEvent, false);
-			//window.addEventListener("resize", doResize, false);
-			//}
-			if (v) {
-				caObj.style.border = "none";
-			}
-			doResize();
-			doGenData(true);
-			doDraw();
-			animate();
-
-		},
-		this.start = function () {
-			isStart = true;
-			canTouch = true;
-			var now = (+new Date);
-			lastFpsUpdateTime = now;
+		isStart = false;
+		canTouch = false;
+		goodJump = 0;
+		//document.getElementById("worldOut").innerHTML = '<canvas id="world" width="900" height="550" style="position: absolute; left: 0px; top: 0px;"></canvas>';
+		btn_start = document.getElementById("btn_start");
+		caObj = document.getElementById("world");
+		// if support canvase
+		//if (caObj && caObj.getContext) {
+		ctxtObj = caObj.getContext("2d");
+		// event
+		caObj.addEventListener("click", ca_click2, false);
+		//caObj.addEventListener("touchstart", ca_click, false);
+		caObj.addEventListener("touchstart", ca_click, false);
+		caObj.addEventListener("touchend", stopEvent, false);
+		caObj.addEventListener("touchmove", stopEvent, false);
+		caObj.addEventListener("touchcancel", stopEvent, false);
+		caObj.addEventListener("gesturestart", stopEvent, false);
+		caObj.addEventListener("gesturechange", stopEvent, false);
+		caObj.addEventListener("gestureend", stopEvent, false);
+		//window.addEventListener("resize", function(e){}, false);
+		caObj.addEventListener("mousedown", stopEvent, false);
+		caObj.addEventListener("mouseup", stopEvent, false);
+		caObj.addEventListener("mousemove", stopEvent, false);
+		//window.addEventListener("resize", doResize, false);
+		//}
+		if (v) {
+			caObj.style.border = "none";
 		}
-};
+		doResize();
+		doGenData(true);
+		doDraw();
+		animate();
 
-// cell object
-function Cell(row, col, color, needClick) {
-	this.position = {
-		r: row,
-		c: col
+	};
+
+	this.start = function () {
+		isStart = true;
+		canTouch = true;
+		var now = (+new Date);
+		lastFpsUpdateTime = now;
 	}
-	this.color = color;
-	this.isOver = false;
-	this.isNeedClick = needClick;
 }
 
-Cell.prototype.doCheckClick = function (x, y) {
-	var result = false;
-	if (true) {
-		// in this cell
-		// if right return true;
-		// else return false;
-	}
-	return result;
-};
-
 window.onload = function () {
-	new BlackWorld().init();
+	var bw = new BlackWorld();
+	bw.init();
 }

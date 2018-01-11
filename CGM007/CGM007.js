@@ -1,57 +1,5 @@
 ﻿;
-
-// cell object
-function Cell(row, col, color, needClick) {
-	this.position = {
-		r: row,
-		c: col
-	}
-	this.color = color;
-	this.isOver = false;
-	this.isNeedClick = needClick;
-}
-
-Cell.prototype.doCheckClick = function (x, y) {
-	var result = false;
-	if (true) {
-		// in this cell
-		// if right return true;
-		// else return false;
-	}
-	return result;
-};
-
-function BlackWorld() {
-	var v = navigator.userAgent.toLowerCase().indexOf("android") != -1 || navigator.userAgent.toLowerCase().indexOf("iphone") != -1 || navigator.userAgent.toLowerCase().indexOf("ipad") != -1;
-
-	var caW = v ? window.innerWidth : 400,
-		caH = v ? window.innerHeight : 600,
-		lastFpsUpdateTime = (+new Date),
-		caObj, ctxtObj, allRow = [],
-		rowC = 3.4,
-		colC = 4,
-		cellW = caW / colC,
-		cellH = caH / rowC,
-		rC = 4,
-		cC = 4,
-		isStart = false,
-		canGoOn = false,
-		canTouch = false,
-		curOffset = -cellH,
-		downSpeed = cellH / 2 + 0.5,
-		errorTime = 0,
-		bigError = 1,
-		goodJump = 0,
-		startTime,
-		caObjWOffset = 0,
-		caObjHOffset = 0,
-		winCount = 120, //学霸 线
-		lostCount = 40, //loser 线
-		normalCount = 60, //normal 线
-		timeDeadLine = 30, //限时
-		haveRest = false;
-
-	var btn_start;
+var BlackWorld = function () {
 
 	function doResize() {
 		caW = v ? window.innerWidth : 400;
@@ -110,20 +58,24 @@ function BlackWorld() {
 				var y = e.touches[0].pageY;
 				var right = false;
 				var row = allRow[1];
-				for (var i = 0; i < row.length; i++) {
-					//console.log(row[i].position.c * cellW,(row[i].position.c+1) * cellW,x,row[i].isNeedClick );
-					if (
-						row[i].position.c * cellW <= x &&
-						(row[i].position.c + 1) * cellW >= x
-					) {
-						if (row[i].isNeedClick) {
-							right = true;
-							row[i].color = "lightblue";
-							goodJump++;
+				
+				if (row) {
+					for (var i = 0; i < row.length; i++) {
+						//console.log(row[i].position.c * cellW,(row[i].position.c+1) * cellW,x,row[i].isNeedClick );
+						if (
+							row[i].position.c * cellW <= x &&
+							(row[i].position.c + 1) * cellW >= x
+						) {
+							if (row[i].isNeedClick) {
+								right = true;
+								row[i].color = "lightblue";
+								goodJump++;
+							}
+							break;
 						}
-						break;
 					}
 				}
+
 				if (right) {
 					isStart = true;
 					canGoOn = true;
@@ -138,67 +90,6 @@ function BlackWorld() {
 		e.stopPropagation();
 	}
 
-	function ca_click2(e) {
-		e.preventDefault();
-		//e.stopPropagation();
-		if (!v && isStart && canTouch) {
-			var x = e.pageX - caObjWOffset;
-			var y = e.pageY - caObjHOffset;
-			var right = false;
-			var row = allRow[1];
-			for (var i = 0; i < row.length; i++) {
-				if (
-					row[i].position.c * cellW <= x &&
-					(row[i].position.c + 1) * cellW >= x
-				) {
-					if (row[i].isNeedClick) {
-						right = true;
-						row[i].color = "lightblue";
-						goodJump++;
-					} else {
-						row[i].color = "pink";
-						downSpeed = cellH * 0.4 + 0.5;
-						errorTime++;
-					}
-					break;
-				}
-			}
-			if (right) {
-				canGoOn = true;
-				canTouch = false;
-			}
-		} else if (!v && !isStart && !haveRest) {
-			var x = e.pageX - caObjWOffset;
-			var y = e.pageY - caObjHOffset;
-			var right = false;
-			var row = allRow[1];
-			for (var i = 0; i < row.length; i++) {
-				//console.log(row[i].position.c * cellW,(row[i].position.c+1) * cellW,x,row[i].isNeedClick );
-				if (
-					row[i].position.c * cellW <= x &&
-					(row[i].position.c + 1) * cellW >= x
-				) {
-					if (row[i].isNeedClick) {
-						right = true;
-						row[i].color = "lightblue";
-						goodJump++;
-					}
-					break;
-				}
-			}
-			if (right) {
-				isStart = true;
-				canGoOn = true;
-				canTouch = true;
-				var now = (+new Date);
-				startTime = now;
-				lastFpsUpdateTime = now;
-			}
-		}
-		//e.preventDefault();
-		e.stopPropagation();
-	}
-
 	function doDraw() {
 		ctxtObj.clearRect(0, 0, caObj.width, caObj.height);
 		var curOff = curOffset;
@@ -207,7 +98,7 @@ function BlackWorld() {
 				ctxtObj.beginPath();
 				ctxtObj.fillStyle = allRow[i][j].color;
 				if (!isStart && i == 0) {
-					ctxtObj.fillStyle = "#ffffff";
+					ctxtObj.fillStyle = "yellow";
 				}
 				ctxtObj.fillRect(j * cellW, (rC - i) * cellH + curOff + 0.5, cellW, cellH);
 				//ctxtObj.strokeStyle = "#0000ff";
@@ -230,7 +121,6 @@ function BlackWorld() {
 	}
 
 	function animate(time) {
-		let me = this;
 		if (isStart) {
 			var hasTime = (timeDeadLine - Math.round(((new Date).getTime() - startTime) / 1E3 * 100) / 100);
 			hasTime = Math.round(hasTime * 100) / 100
@@ -289,6 +179,37 @@ function BlackWorld() {
 		alert();
 	}
 
+	var v = navigator.userAgent.toLowerCase().indexOf("android") != -1 || navigator.userAgent.toLowerCase().indexOf("iphone") != -1 || navigator.userAgent.toLowerCase().indexOf("ipad") != -1,
+		caW = v ? window.innerWidth : 400,
+		caH = v ? window.innerHeight : 600,
+		lastFpsUpdateTime = (+new Date),
+		caObj, ctxtObj, allRow = [],
+		rowC = 3.4,
+		colC = 4,
+		cellW = caW / colC,
+		cellH = caH / rowC,
+		rC = 4,
+		cC = 4,
+		isStart = false,
+		canGoOn = false,
+		canTouch = false,
+		curOffset = -cellH,
+		downSpeed = cellH / 2 + 0.5,
+		errorTime = 0,
+		bigError = 1,
+		goodJump = 0,
+		startTime,
+		caObjWOffset = 0,
+		caObjHOffset = 0,
+		winCount = 120,
+		lostCount = 40,
+		normalCount = 60,
+		timeDeadLine = 30,
+		haveRest = false;
+
+
+	var btn_start;
+
 	this.init = function () {
 		isStart = false;
 		canTouch = false;
@@ -300,7 +221,7 @@ function BlackWorld() {
 		//if (caObj && caObj.getContext) {
 		ctxtObj = caObj.getContext("2d");
 		// event
-		caObj.addEventListener("click", ca_click2, false);
+		// caObj.addEventListener("click", ca_click2, false);
 		//caObj.addEventListener("touchstart", ca_click, false);
 		caObj.addEventListener("touchstart", ca_click, false);
 		caObj.addEventListener("touchend", stopEvent, false);
@@ -331,9 +252,30 @@ function BlackWorld() {
 		var now = (+new Date);
 		lastFpsUpdateTime = now;
 	}
+
 }
 
+// cell object
+function Cell(row, col, color, needClick) {
+	this.position = {
+		r: row,
+		c: col
+	}
+	this.color = color;
+	this.isOver = false;
+	this.isNeedClick = needClick;
+}
+
+Cell.prototype.doCheckClick = function (x, y) {
+	var result = false;
+	if (true) {
+		// in this cell
+		// if right return true;
+		// else return false;
+	}
+	return result;
+};
+
 window.onload = function () {
-	var bw = new BlackWorld();
-	bw.init();
+	new BlackWorld().init();
 }

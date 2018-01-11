@@ -162,7 +162,24 @@
                         {
                             text: '下午',
                             value: 2001
-                        }
+                        }, {
+                            text: '上午',
+                            value: 1999
+                        },
+                        {
+                            text: '下午',
+                            value: 2001
+                        }, {
+                            text: '上午',
+                            value: 1999
+                        },
+                        {
+                            text: '下午',
+                            value: 2001
+                        }, {
+                            text: '上午',
+                            value: 1999
+                        },
                     ],
                     pData2: [{
                             text: '1',
@@ -243,6 +260,30 @@
                         },
                     ],
                     pData3: [{
+                            text: '01',
+                            value: 1
+                        },
+                        {
+                            text: '02',
+                            value: 2
+                        },
+                        {
+                            text: '03',
+                            value: 3
+                        },
+                        {
+                            text: '04',
+                            value: 4
+                        },
+                        {
+                            text: '05',
+                            value: 5
+                        },
+                        {
+                            text: '06',
+                            value: 6
+                        },
+                        {
                             text: '01',
                             value: 1
                         },

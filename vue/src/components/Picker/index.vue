@@ -2,35 +2,33 @@
     <transition :name="cls+'-ani-std'">
         <div :class="[cls+'-container',visible?'on':'']">
             <div :class="[cls+'-inner']">
-                <div class="area_ctrl" :class="show ? 'slideInUp' : 'slideInDown'">
-                    <div class="area_btn_box">
-                        <div class="area_btn larea_cancel" @click="close">取消</div>
-                        <div class="area_btn larea_finish" @click="finish">确定</div>
+                <div class="gear-box" :class="show ? 'slideInUp' : 'slideInDown'">
+                    <div class="gear-control">
+                        <div class="gear-control-btn cancel" @click="close">取消</div>
+                        <div class="gear-control-btn confirm" @click="finish">确定</div>
                     </div>
-                    <div class="area_roll_mask">
-                        <div class="area_roll">
+                    <div class="gear-mask">
+                        <div class="gear-mask-inner">
                             <div>
-                                <div top="0" class="gear area_province" data-areatype="area_province" data-type="provs" :data-len="pData1.length" val="5"
+                                <div top="0" class="gear province" data-areatype="area_province" data-type="province" :data-len="pData1.length" val="5"
                                     @touchstart="gearTouchStart" @touchmove="gearTouchMove" @touchend="gearTouchEnd">
                                     <div class="tooth" v-for="item in pData1">{{item.text}}</div>
                                 </div>
-                                <div class="area_grid">
+                                <div class="gear-rod">
                                 </div>
                             </div>
                             <div v-if="selectData.columns > 1">
-                                <div class="gear area_city" top="0" data-areatype="area_city" data-type="city" :data-len="pData2.length" @touchstart="gearTouchStart"
-                                    @touchmove="gearTouchMove" @touchend="gearTouchEnd" val="5">
+                                <div class="gear city" top="0" data-areatype="area_city" data-type="city" :data-len="pData2.length" @touchstart="gearTouchStart" @touchmove="gearTouchMove" @touchend="gearTouchEnd" val="5">
                                     <div class="tooth" v-for="item in pData2">{{item.text}}</div>
                                 </div>
-                                <div class="area_grid">
+                                <div class="gear-rod">
                                 </div>
                             </div>
                             <div v-if="selectData.columns > 2">
-                                <div class="gear area_county" top="0" data-areatype="area_county" :data-len="pData3.length" @touchstart="gearTouchStart"
-                                    @touchmove="gearTouchMove" @touchend="gearTouchEnd" val="5">
+                                <div class="gear county" top="0" data-areatype="area_county" :data-len="pData3.length" @touchstart="gearTouchStart" @touchmove="gearTouchMove" @touchend="gearTouchEnd" val="5">
                                     <div class="tooth" v-for="item in pData3">{{item.text}}</div>
                                 </div>
-                                <div class="area_grid">
+                                <div class="gear-rod">
                                 </div>
                             </div>
                         </div>
@@ -219,7 +217,7 @@
                 var type = target.getAttribute('data-type')
                 // 不是联级
                 if (!this.selectData.link) {
-                    if (type === 'provs') {
+                    if (type === 'province') {
                         _self.selects.select1 = _self.pData1[endVal]
                     } else if (type === 'city') {
                         _self.selects.select2 = _self.pData2[endVal]
@@ -227,7 +225,7 @@
                         _self.selects.select3 = _self.pData3[endVal]
                     }
                 } else {
-                    if (type === 'provs') {
+                    if (type === 'province') {
                         _self.selects.select1 = _self.pData1[endVal]
                         _self.resetData2(endVal)
                         if (this.selectData.columns === 3) {
@@ -244,7 +242,7 @@
                 }
             },
             resetData2(endVal) {
-                var city = document.querySelector('.area_city')
+                var city = document.querySelector('.city')
                 if (this.selectData.pData2[this.pData1[endVal].value]) {
                     this.pData2 = this.selectData.pData2[this.pData1[endVal].value]
                 } else {
@@ -255,7 +253,7 @@
                 city.style["-webkit-transform"] = 'translate3d(0, 0, 0)';
             },
             resetData3(endVal) {
-                var county = document.querySelector('.area_county')
+                var county = document.querySelector('.county')
                 if (this.pData2.length > 0 && this.pData2[endVal]) {
                     this.pData3 = this.selectData.pData3[this.pData2[endVal].value]
                 } else {

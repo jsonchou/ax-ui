@@ -284,27 +284,27 @@
                             value: 6
                         },
                         {
-                            text: '01',
+                            text: '07',
                             value: 1
                         },
                         {
-                            text: '02',
+                            text: '08',
                             value: 2
                         },
                         {
-                            text: '03',
+                            text: '09',
                             value: 3
                         },
                         {
-                            text: '04',
+                            text: '10',
                             value: 4
                         },
                         {
-                            text: '05',
+                            text: '11',
                             value: 5
                         },
                         {
-                            text: '06',
+                            text: '12',
                             value: 6
                         },
                     ]
@@ -332,7 +332,7 @@
 
                 setTimeout(() => {
                     mask.hide();
-                }, 5000)
+                }, 5000);
 
             },
             onToast(e) {
@@ -354,13 +354,13 @@
                     closable: true,
                     msg: '请填写您的手机号码222',
                     onClose(comp) {
-                        me.$toast('你关闭了弹窗')
+                        me.$toast('你关闭了弹窗');
                     },
                     onCancle(comp) {
-                        me.$toast('你取消了操作')
+                        me.$toast('你取消了操作');
                     },
                     onConfirm(comp) {
-                        me.$toast('你的操作成功')
+                        me.$toast('你的操作成功');
                     },
                 })
             },
@@ -376,10 +376,10 @@
                     closable: false,
                     msg: '请填写您的手机号码222',
                     onHide(comp) {
-                        me.$toast('你关闭了通知')
+                        me.$toast('你关闭了通知');
                     },
                     onShow(comp) {
-                        //me.$toast('你打开了通知')
+                        //me.$toast('你打开了通知');
                     },
                 });
 
@@ -396,13 +396,13 @@
                 this.show5 = false
             },
             confirmFn(data) {
-                this.selectStr = data.select1.text
+                this.selectStr = data.select1.text;
                 console.log(data)
                 if (data.select2) {
-                    this.selectStr += '-' + data.select2.text
+                    this.selectStr += '-' + data.select2.text;
                 }
                 if (data.select3) {
-                    this.selectStr += '-' + data.select3.text
+                    this.selectStr += '-' + data.select3.text;
                 }
                 this.close()
             },

@@ -10,22 +10,23 @@
                     <div class="gear-mask">
                         <div class="gear-mask-inner">
                             <div>
-                                <div top="0" class="gear province" data-areatype="area_province" data-type="province" :data-len="pData1.length" val="5"
-                                    @touchstart="gearTouchStart" @touchmove="gearTouchMove" @touchend="gearTouchEnd">
+                                <div top="0" class="gear province" data-areatype="area_province" data-type="province" :data-len="pData1.length" val="5" @touchstart="gearTouchStart" @touchmove="gearTouchMove" @touchend="gearTouchEnd">
                                     <div class="tooth" v-for="item in pData1">{{item.text}}</div>
                                 </div>
                                 <div class="gear-rod">
                                 </div>
                             </div>
                             <div v-if="selectData.columns > 1">
-                                <div class="gear city" top="0" data-areatype="area_city" data-type="city" :data-len="pData2.length" @touchstart="gearTouchStart" @touchmove="gearTouchMove" @touchend="gearTouchEnd" val="5">
+                                <div class="gear city" top="0" data-areatype="area_city" data-type="city" :data-len="pData2.length" @touchstart="gearTouchStart"
+                                    @touchmove="gearTouchMove" @touchend="gearTouchEnd" val="5">
                                     <div class="tooth" v-for="item in pData2">{{item.text}}</div>
                                 </div>
                                 <div class="gear-rod">
                                 </div>
                             </div>
                             <div v-if="selectData.columns > 2">
-                                <div class="gear county" top="0" data-areatype="area_county" :data-len="pData3.length" @touchstart="gearTouchStart" @touchmove="gearTouchMove" @touchend="gearTouchEnd" val="5">
+                                <div class="gear county" top="0" data-areatype="area_county" :data-len="pData3.length" @touchstart="gearTouchStart" @touchmove="gearTouchMove"
+                                    @touchend="gearTouchEnd" val="5">
                                     <div class="tooth" v-for="item in pData3">{{item.text}}</div>
                                 </div>
                                 <div class="gear-rod">
@@ -41,8 +42,8 @@
 
 <script>
     const prefix = __prefix__;
-    import validator from '../../utils/validator'
-    import baseMixin from '../../mixins/base'
+    import validator from '../../utils/validator';
+    import baseMixin from '../../mixins/base';
 
     export default {
         name: `${prefix}Picker`,
@@ -58,7 +59,7 @@
             selectData: {
                 type: Object,
                 default: {}
-            }
+            },
         },
         data() {
             return {

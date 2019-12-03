@@ -29,9 +29,9 @@ config.activityCode = _util.url.get('activityCode');
 config.appUrl += config.bizOrigin.toUpperCase();
 
 if (config.machine.indexOf('-uat') > -1) {
-    config.assetsPath = `//staticdaily.zhongan.com/website/assets/subject/__spaMode__/__spaDir__/assets`;
-    config.cmsApi = `//mgw-uat.zhongan.com`;
-    config.wxApi = `//weixin.zhongan.com/weixin_qa`;
+    config.assetsPath = `//staticdaily.demo.com/website/assets/subject/__spaMode__/__spaDir__/assets`;
+    config.cmsApi = `//mgw-uat.demo.com`;
+    config.wxApi = `//weixin.demo.com/weixin_qa`;
 }
 
 config.antifraud.tail.bizOrigin = config.bizOrigin;
@@ -43,7 +43,7 @@ _zax.biz.antifraud(true, config.antifraud.provider, "webactivity", config.env, c
 });
 
 if (typeof Object.assign != 'function') {
-    _util.file.load('https://static.zhongan.com/website/assets/libs/polyfills/object-assign.js')
+    _util.file.load('https://static.demo.com/website/assets/libs/polyfills/object-assign.js')
 }
 
 window.config = config;

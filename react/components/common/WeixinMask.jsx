@@ -17,7 +17,7 @@ class WeixinMask extends PureComponent {
         return (
             <div className="template-weixinmask" onClick={onClose} >
                 <div className={`md-weixinmask ${pop ? 'on' : ''}`}>
-                    <img src="//static.zhongan.com/website/assets/subject/vue/20161221/assets/images/weixin-mask.png" alt="" />
+                    <img src="//static.demo.com/website/assets/subject/vue/20161221/assets/images/weixin-mask.png" alt="" />
                 </div>
             </div>
         )

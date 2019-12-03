@@ -55,7 +55,7 @@ export const stdFetch = (ajaxParams, actionType) => {
 export const setPopStatus = (tag, status) => {
 
     if (_zax.device.app && tag == 'login' && status) {
-        location.href = "https://login.zhongan.com/mobile/login.htm?sourceApp=8&target=" + location.href;
+        location.href = "https://login.demo.com/mobile/login.htm?sourceApp=8&target=" + location.href;
         return;
     }
 

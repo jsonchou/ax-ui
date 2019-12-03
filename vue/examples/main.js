@@ -14,7 +14,7 @@ console.log(axconfig)
 
 //前置信息
 if (typeof Object.assign != 'function') {
-    _util.file.load('https://static.zhongan.com/website/assets/libs/polyfills/object-assign.js')
+    _util.file.load('https://static.demo.com/website/assets/libs/polyfills/object-assign.js')
 }
 
 //全局注入
